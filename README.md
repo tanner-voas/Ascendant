@@ -1,4 +1,4 @@
-# Ascendant — Tactical Battleground (v0.1.1)
+# Ascendant — Tactical Battleground (v0.1.2)
 
 Initial, classless 5v5 prototype for a future LitRPG cultivation role-playing game, loosely inspired by Pathfinder. No classes, magic, feats, gear, levels, or unique abilities yet. This is a standalone app and a lazy-loaded AppLauncher module; no external dependencies or backend.
 
@@ -22,12 +22,36 @@ Open `http://localhost:8765`. Standalone PWA assets are in `dist/standalone`; Ap
 
 ## Mechanics / provisional calibration
 
-`src/engine.js` contains the independent deterministic engine. `src/maps.js` creates 20 arenas; `src/app.js` renders the UI. Standard stats are 20; HP and the four other capacities follow the previously proposed power-law formulas. Physical, mental and resolve efficiency falls quadratically, with nonzero floors; resolve can offset exhaustion at a cost. Mana is present but unused by intentionally mundane actions. Health recovery is not available mid-fight in this prototype; recover replenishes energy/resolve. Innate DR is flat and RES proportional, with penetration function support. Heavy strikes have provisional flat penetration. Turn cost uses the approved cosine penalty with Agility scaling, resets next turn, and merges closely spaced bends for cost accounting (not a full curvature/physics model). Movement adds a modest time and energy cost. Off-balance is the initial applied graded status; fear is represented in engine calculations but no current action inflicts it. The complete proposed damage-type/condition catalogue, injuries, death rules, spells, progression and future WorldGen/Chronicle integration are not implemented. These numerical combat values are sandbox defaults, not final balance rules.
+`src/engine.js` contains the independent deterministic engine. `src/maps.js` creates 20 arenas; `src/app.js` renders the UI. Standard stats are 20; HP and the four other capacities follow the previously proposed power-law formulas. Physical, mental and resolve efficiency falls quadratically, with nonzero floors; resolve can offset exhaustion at a cost. Mana is present but unused by intentionally mundane actions. Health recovery is not available mid-fight in this prototype; recover replenishes energy/resolve. Innate DR is flat and RES proportional, with penetration function support. Heavy strikes have provisional flat penetration. Turn cost uses the approved cosine penalty with Agility scaling, resets next turn, and clusters closely spaced bends by travelled distance (not a full curvature/physics model). Movement adds a modest time and energy cost. Off-balance is the initial applied graded status; fear is represented in engine calculations but no current action inflicts it. The complete proposed damage-type/condition catalogue, injuries, death rules, spells, progression and future WorldGen/Chronicle integration are not implemented. These numerical combat values are sandbox defaults, not final balance rules.
 
 ## Tests
 
 `npm test` checks 10,000 stat rolls, deterministic deployment across all maps, path collision/turning, damage penetration, zero-resource action availability, and full AI matches on all 20 maps. New tests cover 10,000 locked allocations, roster JSON validation, exact restoration of the PRNG and replayed future events on 20 arenas, and exhaustive dice combinations for four attack actions. No overlap or out-of-bounds positions allowed for living units.
 
-## v0.1.1 scope
+## v0.1.1 scope (historical)
 
 Usability release only: unchanged stat budget, resource curves, action set, terrain and AI rules. The engine shares action math between forecasts and execution, with structured log details. Mana remains unused. Saved setups from v0.1.0 migrate automatically. No backend or cross-device sync; roster files provide manual portability. Browser navigation is restricted in the release test environment, so real iOS gesture and layout testing remains necessary.
+
+
+## v0.1.2 — Movement and positioning
+
+- **Path editor:** tap or drag on ground to append a segment; tap a numbered waypoint to select it, drag it to relocate it, tap a midpoint `+` to insert a point, or delete the selected waypoint. Undo removes the last point; Clear discards the path. Tap Auto path and then a destination to generate a route; Route to target plans to a legal melee position. Routes stop at the current turn's budget. Trim path clips the existing plan to its longest legal prefix. Neither preview nor route generation consumes dice. The final path is always validated before movement commits.
+- **Map overlays:** blue sampled direct-reach envelope (from the current path endpoint if planning a path); red enemy engagement circles, faded after interception has been spent; orange interception points along the planned path; white facing indicators. The reach envelope is an approximation for one additional straight segment, not the complete set of destinations reachable by detours; individual segments are validated exactly. The threat circle shows nominal range, while actual interception requires line of sight. Pan/pinch/zoom remain available. Face mode changes facing on the current character's turn, without consuming movement; the final movement segment updates facing, and a melee attack faces its target.
+- **Terrain:** four passable difficult-terrain rectangles per original seeded arena, with brush ×1.25, loose stone ×1.40 and soft ground ×1.18. Obstacles and deployment geometry are preserved. Exact covered segment lengths determine terrain cost; overlapping terrain, if present in a custom map, uses the highest applicable multiplier. Separate UI fields report actual distance, turn cost and terrain cost, including after commitment.
+
+Provisional movement mode multipliers (relative to Run; the budget is further adjusted by fatigue, conditions, Agility and Resolve use):
+
+| Mode | Budget | Energy per budget metre | Momentum coefficient | Movement delay contribution | Interception attack modifier |
+|---|---:|---:|---:|---:|---:|
+| Walk | .72 | .50 | .72 | .85 | -1 |
+| Run | 1 | 1 | 1 | 1 | 0 |
+| Sprint | 1.35 | 1.65 | 1.28 | 1.12 | +2 |
+| Cautious | .58 | .72 | .60 | 1.12 | -4 |
+
+Momentum cost coefficient is `0.15 * normalMovement * (20/AGI)^0.25 * mode.turn`. An isolated bend costs `k*(1-cos(angle))`; for a short approach the coefficient is multiplied by `0.75 + 0.25*min(1,approachMetres/2)`. Consecutive bends separated by at most one metre belong to a cluster. The cluster charges the greater of the individual cosine sum or the cosine cost of its total absolute angle (two units of cost for each full 180° plus the remainder). This prevents tightly subdivided turns from avoiding cost while allowing large, sweeping arcs. There is no initial or terminal turn penalty and no carry-over between turns. Collinear segmentation does not affect costs.
+
+Engagement is a 1.9 m visible reach. Leaving a living opponent's engagement may trigger a single opposed-d20 interception until that defender's next turn; entering alone does not. Interception consumes defender energy, can deal reduced strike damage, and immediately stops the move if the mover reaches zero Health. Movement mode affects exposure. Side attacks receive +1, rear attacks +2, with another +1 for an ally engaging from the opposite direction (>120°). These are provisional positional modifiers, not new skills. All fixed actions remain available; no spells/classes or equipment have been introduced. AI uses the same path validation, movement mode costs and combat rules; routing includes difficult terrain and approximate incoming heading costs, and does not promise a globally optimal route.
+
+Old v0.1.1 saves resume with default facing and available interceptions. The saved positions, resources and PRNG state are preserved, but future battle results may differ because the rules changed. Same-version resume and rematch remain deterministic. The standalone cache includes navigation.js automatically; no launcher source change is required. Update the launcher submodule pointer after pushing this release.
+
+Validation: `npm test` includes previous allocation, dice-distribution and determinism checks plus momentum-subdivision, terrain, mode, facing, interception, fatal interruption, pathfinding, old-save migration and randomized arena tests. The randomized audit completes 100 full 5v5 matches (five per arena) with no draws or invalid positions. Browser navigation is restricted in the release environment; visual/touch testing on actual iOS remains outstanding.
