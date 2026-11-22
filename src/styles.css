@@ -37,3 +37,24 @@ body.ascendant-mode{margin:0;background:#111d22;color:#e3e9e6;font:15px/1.4 -app
 .ascendant-contact b{font-size:14px}
 .ascendant-contact small{font-size:10px;color:#b9a9a7;max-width:90px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ascendant-contact.on{border-color:#ffb17b;background:#443d3d}
+
+/* v0.1.13: fixed, single-line ally and enemy strips with independent pagination. */
+.ascendant-team-strip{display:flex;align-items:center;gap:6px;min-height:48px;margin:4px 0 5px;min-width:0}
+.ascendant-strip-label{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:#9eb8ba;flex:0 0 47px}
+.ascendant-strip-people{display:flex;align-items:stretch;gap:4px;min-width:0;flex:1;overflow:hidden}
+.ascendant-strip-people>button{width:calc((100% - 16px)/5);min-width:0;max-width:100px;flex:0 0 calc((100% - 16px)/5);padding:5px 3px;line-height:1.15;overflow:hidden}
+.ascendant-strip-people>button b,.ascendant-strip-people>button small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ascendant-strip-people>button small{font-size:10px;color:#bac8c8}
+.ascendant-strip-people .ascendant-top-resources{height:17px;margin-top:3px}
+.ascendant-strip-people .ascendant-contact{color:#e7b0a7;border-color:#58484b;background:#302e34}
+.ascendant-strip-people .ascendant-contact b{color:#f39d93}
+.ascendant-no-contacts{color:#94a8aa;font-size:11px;align-self:center}
+.ascendant-strip-pagination{display:flex;gap:2px;flex:0 0 auto}
+.ascendant-strip-pagination button{min-height:32px;width:25px;padding:0 2px;font-size:20px;line-height:1}
+.ascendant-team-strip.foes{border-top:1px solid #30474a;padding-top:5px;margin-bottom:7px}
+.ascendant-compact-actions button{position:relative}
+.ascendant-engage-required{position:absolute;right:3px;top:2px;font-size:9px;font-weight:800;color:#ff9288;line-height:1}
+.ascendant-engagement-actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:12px;color:#c2d1cf;margin:5px 0}
+.ascendant-engagement-actions button{min-height:30px;padding:3px 7px;font-size:11px;border-color:#945453;color:#f4b6b0}
+
+.ascendant-strip-people .ally.dead{opacity:.48}

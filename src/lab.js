@@ -3,7 +3,7 @@ import {makeMap,validateMap} from './maps.js';
 import {normalizeTactics} from './tactics.js';
 import {RULES,normalizeRules,experimentalStats} from './lab-rules.js';
 export {RULES};
-export const ENGINE_REVISION="0.1.12";
+export const ENGINE_REVISION="0.1.13";
 // Wilson score interval for a binomial win proportion; draws are non-wins.
 export function winInterval(wins,n){if(!n)return null;const z=1.95996398454,p=wins/n,den=1+z*z/n,mid=(p+z*z/(2*n))/den,half=z*Math.sqrt(p*(1-p)/n+z*z/(4*n*n))/den;return [Math.max(0,mid-half),Math.min(1,mid+half)];}
 export const OBJECTIVES={elimination:'Elimination',survive:'Survive until deadline',escape:'A1 reaches enemy deployment',control:'Control center at deadline',protect:'Protect A1 until deadline'};

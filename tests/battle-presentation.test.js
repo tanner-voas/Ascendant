@@ -7,7 +7,7 @@ import {snapshot} from '../src/persistence.js';
 
 const roster=()=>Array.from({length:2},(_,side)=>Array.from({length:5},(_,n)=>({name:`${side?'Enemy':'Ally'} ${n+1}`,stats:balanced()})));
 
-test('player UI: only perceived enemy identity, allied resources and timing, character-click movement',async()=>{
+test('player UI: fixed ally and enemy rows, private opponents and character-click movement',async()=>{
  const team=roster(),map=makeMap(0,222,{fog:false}),battle=newBattle(team,map,91);
  const ally=battle.units[0],enemy=battle.units[5];
  battle.active='A1';ally.next=battle.time;ally.hp=ally.max.hp*.62;ally.physical=ally.max.physical*.43;
@@ -35,14 +35,14 @@ test('player UI: only perceived enemy identity, allied resources and timing, cha
  const click=dataset=>handlers.click({target:{closest:()=>({dataset,disabled:false})}});
  click({do:'resume'});
  assert.match(root.innerHTML,/YOUR TURN/);
- assert.match(root.innerHTML,/aria-label="Allied turns and resources"/);
- const top=root.innerHTML.match(/<div class="ascendant-timeline"[\s\S]*?<\/div>/)?.[0];
+ assert.match(root.innerHTML,/aria-label="Allies"/);assert.match(root.innerHTML,/aria-label="Enemies"/);assert.doesNotMatch(root.innerHTML,/Perceived enemies/);
+ const top=root.innerHTML.match(/<div class="ascendant-team-strip friends"[\s\S]*?<\/div><\/div>/)?.[0];
  assert.ok(top);
  assert.equal((top.match(/class="ascendant-top-resources"/g)||[]).length,5);
  assert.doesNotMatch(top, /data-unit="E\d"|Enemy 1|SECRET/);
  assert.match(top,/height:62%/);assert.match(top,/height:43%/);
- const list=root.innerHTML.match(/<div class="ascendant-contact-strip"[\s\S]*?<\/div>/)?.[0];
- assert.ok(list,'perceived enemy strip is present');
+ const list=root.innerHTML.match(/<div class="ascendant-team-strip foes"[\s\S]*?<\/div><\/div>/)?.[0];
+ assert.ok(list,'enemy row is present');
  assert.match(list,/data-unit="E1"/);assert.match(list,/Enemy 1/);
  assert.doesNotMatch(list,/data-unit="E2"|\d\.\ds|hp|physical|mental|resolve|recovery|preparation|execution/);
  const token=root.innerHTML.match(/<g data-unit="E1"[^>]*>([\s\S]*?)<\/g>/)?.[1];
