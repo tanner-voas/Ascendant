@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {visibleTo} from '../src/battlefield.js';
+import {restore} from '../src/persistence.js';
 // An event-level smoke test of the real app module, not a browser/layout test.
 // UI rendering and delegated handlers run against a minimal DOM fixture.
 test('setup, start, movement planner controls, commit, facing, and resume render without runtime errors',async()=>{
@@ -15,7 +17,7 @@ test('setup, start, movement planner controls, commit, facing, and resume render
  const change=(id,value)=>events.change({target:{id,value,checked:value}});
  const saved=()=>JSON.parse(storage.get('ascendant.battle.v1'));
  const tap=(x,y,dataset={})=>{const target={closest:s=>s==='[data-unit]'&&dataset.unit?{dataset}:s==='[data-waypoint]'&&dataset.waypoint?{dataset}:s==='[data-insert]'&&dataset.insert?{dataset}:null};const ev={button:0,pointerId:1,clientX:x,clientY:y,target};boardEvents.pointerdown(ev);boardEvents.pointerup(ev);};
- assert.match(root.innerHTML,/v0\.1\.6/);events.input({target:{id:'ascendant-seed',value:'42',dataset:{}}});button({do:'start'});button({do:'pause'});
+ assert.match(root.innerHTML,/v0\.1\.7/);events.input({target:{id:'ascendant-seed',value:'42',dataset:{}}});await change('ascendant-fog',false);button({do:'start'});button({do:'pause'});
  for(let i=0;i<10&&!saved().state.active.startsWith('A');i++)button({do:'step'});
  assert.match(root.innerHTML,/YOUR TURN/);assert.match(root.innerHTML,/Damage defenses by type/);assert.match(root.innerHTML,/Conditions/);assert.match(root.innerHTML,/data-action="grapple"/);assert.match(root.innerHTML,/data-action="intimidate"/);assert.match(root.innerHTML,/data-action="stand"/);assert.match(root.innerHTML,/value="block"/);assert.match(root.innerHTML,/value="parry"/);assert.match(root.innerHTML,/Momentum/);assert.match(root.innerHTML,/data-movement="sprint"/);
  await change('ascendant-effort','0.7');await change('ascendant-push','physical');assert.deepEqual(saved().ui.push,{effort:.7,push:'physical'});await change('ascendant-effort','1');await change('ascendant-push','none');button({movement:'sprint'});assert.equal(saved().ui.moveKind,'sprint');
@@ -30,4 +32,6 @@ test('setup, start, movement planner controls, commit, facing, and resume render
  await change('ascendant-reaction','brace');assert.equal(saved().state.units.find(v=>v.id===u.id).reaction,'brace');button({do:'modeFace'});tap(u.x,u.y);assert.match(root.innerHTML,/Facing updated/);button({action:'guard'});
  button({do:'setup'});assert.match(root.innerHTML,/Resume/);button({do:'resume'});assert.match(root.innerHTML,/Saved battle restored/);assert.equal(saved().ui.paused,true);
  button({do:'replayPrev'});assert.match(root.innerHTML,/Recorded battlefield position/);await change('ascendant-threat',false);assert.equal(saved().ui.showThreat,false);
+ button({do:'setup'});await change('ascendant-map','12');await change('ascendant-map-seed','123');await change('ascendant-width','46');await change('ascendant-height','30');await change('ascendant-deployment','7');await change('ascendant-fog',true);assert.match(root.innerHTML,/Canal Works/);button({do:'start'});const fog=restore(saved());assert.equal(fog.map.seed,123);assert.equal(fog.map.w,46);assert.equal(fog.map.h,30);assert.equal(fog.map.zones[0].w,7);assert.ok(fog.map.fog);assert.match(root.innerHTML,/Fog enabled/);assert.match(root.innerHTML,/Full replay and raw battle export unlock/);for(const u of fog.units.filter(u=>!visibleTo(fog,0,u)))assert.ok(!root.innerHTML.includes(`data-unit="${u.id}"`));await change('ascendant-sight','individual');assert.equal(saved().ui.sightView,'individual');button({do:'setup'});button({do:'resume'});assert.equal(saved().battlefield.seed,123);
+
 });
