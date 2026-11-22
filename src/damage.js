@@ -6,7 +6,7 @@ function nonnegative(n,label){if(!Number.isFinite(n)||n<0)throw new RangeError(`
 export function innateDefense(stats,type='blunt'){
  if(!Object.hasOwn(DAMAGE_TYPES,type))throw new RangeError('Unknown damage type');
  const b=(type==='mental'?(stats.END+stats.WIL)/2:stats.END)/20;
- nonnegative(b,'defense stat');const p=b**.75;return {dr:2*b**.8,res:.6*p/(4+p)};
+ nonnegative(b,'defense stat');const p=b**.85;return {dr:2*b**.95,res:.6*p/(4+p)};
 }
 export function combineDefenses(...sources){let dr=0,remaining=1;for(const s of sources){if(!s)continue;dr+=nonnegative(s.dr??0,'DR');remaining*=1-clamp(nonnegative(s.res??0,'RES'),0,1);}return {dr,res:1-remaining};}
 export function defenseProfile(stats,bonuses={}){return Object.fromEntries(Object.keys(DAMAGE_TYPES).map(type=>[type,combineDefenses(innateDefense(stats,type),...(bonuses[type]??[]))]));}
@@ -27,3 +27,6 @@ export function resolveDamage(components,profile){
 // a large enough capability difference can overwhelm even excellent luck.
 export function degree(margin){return margin>=12?'criticalSuccess':margin>=0?'success':margin<=-12?'criticalFailure':'failure';}
 export const criticalScale=outcome=>outcome==='criticalSuccess'?1.4:1;
+
+// Exact opposed-d20 distribution: differences -19..19 have 20-|d| outcomes.
+export function contestCounts(modifier){let hits=0,strong=0,fail=0;for(let d=-19;d<=19;d++){const n=20-Math.abs(d),m=d+modifier;if(m>=0)hits+=n;if(m>=12)strong+=n;if(m<=-12)fail+=n;}return {hits,strong,fail};}

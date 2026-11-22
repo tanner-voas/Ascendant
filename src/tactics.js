@@ -1,5 +1,5 @@
 // Team-level policy only. No stat modifiers, combat RNG draws or private enemy knowledge.
-import {actor,alive,dist,engaged,canAct,act,move,route,routeTo,fitPath,pathCheck,budget,face,clearSegment,los,previewAction} from './engine.js';
+import {actor,alive,dist,engaged,canAct,act,move,route,routeTo,fitPath,pathCheck,budget,face,clearSegment,los,previewAction,total,power} from './engine.js';
 import {visibleTo} from './battlefield.js';
 import {severity,incapacitated} from './conditions.js';
 export const DIFFICULTIES={basic:'Basic',standard:'Standard',tactical:'Tactical'};
@@ -23,7 +23,7 @@ export function coordinatedTurn(b){const c=actor(b);if(!c)return false;const ctx
  const pf=ratio(c,'physical'),mf=ratio(c,'mental'),rf=ratio(c,'resolve'),hf=ratio(c,'hp');const push={effort:pf>.65?.9+.1*cfg.aggression:pf>.35?.7+.2*cfg.aggression:.5+.3*cfg.aggression,push:rf>.18?(pf<.4&&mf<.4?'both':pf<.4?'physical':mf<.4?'mental':'none'):'none'};
  if(c.interceptReady)c.reaction=pf<.12&&mf<.12?(cfg.caution>.7?'brace':'dodge'):c.stats.END>c.stats.AGI*1.15?(c.stats.STR>c.stats.END*.9?'block':'brace'):c.stats.PER>c.stats.REA*1.12&&mf>.25?'parry':c.stats.REA>c.stats.END*1.2&&pf>.25?'counter':'dodge';
  if(c.grappledBy)return commit(b,c,ctx,'escape','Escape restraint to regain mobility',null,push);
- if(c.grappling){const t=foes.find(u=>u.id===c.grappling);if(t&&canAct(b,'strike',t)&&(t.hp<30||others.some(a=>dist(a,t)<3)))return commit(b,c,ctx,'strike','Maintain hold while allies exploit the opening',t,push);return commit(b,c,ctx,'release','Release hold to resume maneuvering');}
+ if(c.grappling){const t=foes.find(u=>u.id===c.grappling);if(t&&canAct(b,'strike',t)&&(ratio(t,'hp')<.3||others.some(a=>dist(a,t)<3)))return commit(b,c,ctx,'strike','Maintain hold while allies exploit the opening',t,push);return commit(b,c,ctx,'release','Release hold to resume maneuvering');}
  if(canAct(b,'stand'))return commit(b,c,ctx,'stand','Restore mobility after being tripped');
  const threats=foes.filter(t=>pending(t)&&t.job.target===c.id),adjacent=foes.filter(t=>canAct(b,'strike',t));let target=adjacent[0];
  // Retreat is deliberately limited by cooldown and requires a healthy ally, so the
@@ -34,12 +34,12 @@ export function coordinatedTurn(b){const c=actor(b);if(!c)return false;const ctx
  for(const t of foes){const kind=engaged(b,c).length?'cautious':pf>.78&&dist(c,t)>budget(c,push)*1.2?'sprint':'run';// Prefer an opposite-side approach for flanking when allies already engage.
  if(cfg.coordination>.55&&ctx.role==='Flanker'&&dist(c,t)<8){const a=others.find(a=>dist(a,t)<2.4);if(a){const dx=t.x-a.x,dy=t.y-a.y,d=Math.hypot(dx,dy)||1,goal={x:t.x+1.55*dx/d,y:t.y+1.55*dy/d};const full=routeTo(b,c,goal,kind);if(full.length>1&&dist(c,goal)<budget(c,push,kind)&&walk(b,c,ctx,full,push,kind,'Approach opposite an engaged ally for a flank',t))return true;}}
  if(walk(b,c,ctx,route(b,c,t,kind),push,kind,ctx.protect&&dist(t,ctx.protect)<3.8?'Intercept threat to a vulnerable ally':'Close on shared priority target',t))return true;}}
- if(target){if(target.hp<18&&pf>.23)push.effort=1;if(pf<.24&&target.hp>22&&others.some(u=>dist(u,target)<2.5)&&!threats.length)return commit(b,c,ctx,'recover','Recover while allies maintain pressure');
+ if(target){if(ratio(target,'hp')<.18&&pf>.23)push.effort=1;if(pf<.24&&ratio(target,'hp')>.22&&others.some(u=>dist(u,target)<2.5)&&!threats.length)return commit(b,c,ctx,'recover','Recover while allies maintain pressure');
  const disrupt=pending(target)&&target.job.target&&target.job.phase!=='recovery';
- if(cfg.coordination>.45&&disrupt&&target.job.impactAt>b.time+.9&&severity(target,'prone')===0&&c.stats.AGI>=26&&canAct(b,'trip',target)&&c.actions%4===1)return commit(b,c,ctx,'trip','Interrupt a pending enemy action',target,push);
- if(cfg.coordination>.55&&c.stats.STR>=30&&others.some(a=>dist(a,target)<2.5)&&canAct(b,'grapple',target)&&c.actions%6===2)return commit(b,c,ctx,'grapple','Hold enemy for nearby allies',target,push);
- if(c.stats.WIL>=25&&severity(target,'fear')<25&&c.actions%6===3&&canAct(b,'intimidate',target))return commit(b,c,ctx,'intimidate','Weaken target before sustained attacks',target,push);
- let key=pf<.2?'quick':target.guard||target.max.dr>2.8||target.hp<18&&pf>.6?'heavy':'strike';let reason=key==='heavy'?'Penetrate defenses or finish weakened target':key==='quick'?'Conserve energy with quick strikes':'Maintain pressure on priority target';
- if(cfg.difficulty==='tactical'){const candidates=['quick','strike','heavy'].map(k=>{const p=previewAction(b,k,target,push),time=p.phases.total??p.delay;const spend=p.cost.physical+.5*p.cost.mental;const score=Math.min(target.hp,p.expected)/(Math.max(.2,time))*(1-.35*(1-pf)*spend/20)+(p.max>=target.hp?.4:0);return {k,score};}).sort((a,z)=>z.score-a.score);key=candidates[0].k;reason='Compare expected damage, timing and energy cost';}
+ if(cfg.coordination>.45&&disrupt&&target.job.impactAt>b.time+.9&&severity(target,'prone')===0&&c.stats.AGI>=1.3*total(c.stats)/10&&canAct(b,'trip',target)&&c.actions%4===1)return commit(b,c,ctx,'trip','Interrupt a pending enemy action',target,push);
+ if(cfg.coordination>.55&&c.stats.STR>=1.5*total(c.stats)/10&&others.some(a=>dist(a,target)<2.5)&&canAct(b,'grapple',target)&&c.actions%6===2)return commit(b,c,ctx,'grapple','Hold enemy for nearby allies',target,push);
+ if(c.stats.WIL>=1.25*total(c.stats)/10&&severity(target,'fear')<25&&c.actions%6===3&&canAct(b,'intimidate',target))return commit(b,c,ctx,'intimidate','Weaken target before sustained attacks',target,push);
+ let key=pf<.2?'quick':target.guard||target.max.dr>2.8*power(c.stats.STR,.85)*power(c.stats.AGI,.15)||ratio(target,'hp')<.18&&pf>.6?'heavy':'strike';let reason=key==='heavy'?'Penetrate defenses or finish weakened target':key==='quick'?'Conserve energy with quick strikes':'Maintain pressure on priority target';
+ if(cfg.difficulty==='tactical'){const candidates=['quick','strike','heavy'].map(k=>{const p=previewAction(b,k,target,push,false),time=p.phases.total??p.delay;const spend=p.cost.physical+.5*p.cost.mental;const score=Math.min(target.hp,p.expected)/(Math.max(.2,time))*(1-.35*(1-pf)*spend/20)+(p.max>=target.hp?.4:0);return {k,score};}).sort((a,z)=>z.score-a.score);key=candidates[0].k;reason='Compare expected damage, timing and energy cost';}
  return commit(b,c,ctx,key,reason,target,push);}
- if(!foes.length)return false;const t=foes.find(t=>canAct(b,'intimidate',t));if(t&&c.stats.WIL>=26&&severity(t,'fear')<30&&mf>.3)return commit(b,c,ctx,'intimidate','Apply pressure from outside melee reach',t,push);if(pf<.85||mf<.8)return commit(b,c,ctx,'recover','Recover before the next engagement');if(foes[0])face(b,foes[0]);return commit(b,c,ctx,'guard','Guard toward visible enemy');}
+ if(!foes.length)return false;const t=foes.find(t=>canAct(b,'intimidate',t));if(t&&c.stats.WIL>=1.3*total(c.stats)/10&&severity(t,'fear')<30&&mf>.3)return commit(b,c,ctx,'intimidate','Apply pressure from outside melee reach',t,push);if(pf<.85||mf<.8)return commit(b,c,ctx,'recover','Recover before the next engagement');if(foes[0])face(b,foes[0]);return commit(b,c,ctx,'guard','Guard toward visible enemy');}

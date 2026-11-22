@@ -1,0 +1,1761 @@
+{
+  "elapsedMs": 33597.171327,
+  "rows": [
+    {
+      "group": "marginal",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        15,
+        15,
+        0
+      ],
+      "meanSeconds": 43.80649032193435,
+      "meanTurns": 37.06666666666667,
+      "actions": {
+        "strike": 854,
+        "quick": 258
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 200,
+      "a": "marginal:STR",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        22,
+        8,
+        0
+      ],
+      "meanSeconds": 37.10181728708791,
+      "meanTurns": 31,
+      "actions": {
+        "strike": 814,
+        "quick": 116
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 200,
+      "a": "marginal:REA",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        22,
+        8,
+        0
+      ],
+      "meanSeconds": 42.07103584466019,
+      "meanTurns": 38.2,
+      "actions": {
+        "strike": 787,
+        "quick": 359
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 200,
+      "a": "marginal:AGI",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        21,
+        9,
+        0
+      ],
+      "meanSeconds": 45.735283849290546,
+      "meanTurns": 40.36666666666667,
+      "actions": {
+        "strike": 831,
+        "trip": 42,
+        "stand": 20,
+        "quick": 318
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 200,
+      "a": "marginal:END",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        16,
+        14,
+        0
+      ],
+      "meanSeconds": 45.824907774265164,
+      "meanTurns": 38.93333333333333,
+      "actions": {
+        "strike": 868,
+        "quick": 300
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 200,
+      "a": "marginal:STA",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        15,
+        15,
+        0
+      ],
+      "meanSeconds": 41.96685493311272,
+      "meanTurns": 34.36666666666667,
+      "actions": {
+        "strike": 943,
+        "quick": 88
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 200,
+      "a": "marginal:VIT",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        19,
+        11,
+        0
+      ],
+      "meanSeconds": 49.89840048063512,
+      "meanTurns": 43.03333333333333,
+      "actions": {
+        "strike": 867,
+        "quick": 424
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 200,
+      "a": "marginal:PER",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        14,
+        16,
+        0
+      ],
+      "meanSeconds": 43.55937944665033,
+      "meanTurns": 36.9,
+      "actions": {
+        "strike": 836,
+        "quick": 271
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 200,
+      "a": "marginal:INT",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        20,
+        10,
+        0
+      ],
+      "meanSeconds": 41.3415110345182,
+      "meanTurns": 35.3,
+      "actions": {
+        "strike": 839,
+        "quick": 220
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 200,
+      "a": "marginal:WIL",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        5,
+        25,
+        0
+      ],
+      "meanSeconds": 45.767323043699704,
+      "meanTurns": 38.333333333333336,
+      "actions": {
+        "strike": 860,
+        "intimidate": 93,
+        "quick": 197
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 200,
+      "a": "marginal:SPI",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        11,
+        19,
+        0
+      ],
+      "meanSeconds": 43.20169606297322,
+      "meanTurns": 36.7,
+      "actions": {
+        "strike": 835,
+        "quick": 266
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 400,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        15,
+        15,
+        0
+      ],
+      "meanSeconds": 23.191799296631164,
+      "meanTurns": 27.033333333333335,
+      "actions": {
+        "strike": 765,
+        "heavy": 46
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 400,
+      "a": "marginal:STR",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        18,
+        12,
+        0
+      ],
+      "meanSeconds": 20.197667957082224,
+      "meanTurns": 23.533333333333335,
+      "actions": {
+        "strike": 664,
+        "heavy": 42
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 400,
+      "a": "marginal:REA",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        19,
+        11,
+        0
+      ],
+      "meanSeconds": 21.893354102306045,
+      "meanTurns": 26.833333333333332,
+      "actions": {
+        "strike": 773,
+        "heavy": 32
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 400,
+      "a": "marginal:AGI",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        17,
+        13,
+        0
+      ],
+      "meanSeconds": 24.533422556700973,
+      "meanTurns": 29.3,
+      "actions": {
+        "strike": 791,
+        "trip": 33,
+        "stand": 15,
+        "heavy": 40
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 400,
+      "a": "marginal:END",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        11,
+        19,
+        0
+      ],
+      "meanSeconds": 25.81185194702533,
+      "meanTurns": 29.7,
+      "actions": {
+        "strike": 855,
+        "heavy": 36
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 400,
+      "a": "marginal:STA",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        14,
+        16,
+        0
+      ],
+      "meanSeconds": 23.678227029695716,
+      "meanTurns": 27.5,
+      "actions": {
+        "strike": 772,
+        "heavy": 53
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 400,
+      "a": "marginal:VIT",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        20,
+        10,
+        0
+      ],
+      "meanSeconds": 27.739563750501418,
+      "meanTurns": 31.866666666666667,
+      "actions": {
+        "strike": 924,
+        "heavy": 32
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 400,
+      "a": "marginal:PER",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        14,
+        16,
+        0
+      ],
+      "meanSeconds": 23.974061586874576,
+      "meanTurns": 27.7,
+      "actions": {
+        "strike": 789,
+        "heavy": 42
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 400,
+      "a": "marginal:INT",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        16,
+        14,
+        0
+      ],
+      "meanSeconds": 23.32392725738235,
+      "meanTurns": 27.2,
+      "actions": {
+        "strike": 759,
+        "heavy": 57
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 400,
+      "a": "marginal:WIL",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        8,
+        22,
+        0
+      ],
+      "meanSeconds": 25.163090801339646,
+      "meanTurns": 29.3,
+      "actions": {
+        "strike": 769,
+        "intimidate": 72,
+        "heavy": 38
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 400,
+      "a": "marginal:SPI",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        8,
+        22,
+        0
+      ],
+      "meanSeconds": 23.988920103564137,
+      "meanTurns": 27.8,
+      "actions": {
+        "strike": 799,
+        "heavy": 35
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 800,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        16,
+        14,
+        0
+      ],
+      "meanSeconds": 14.905659218176584,
+      "meanTurns": 25.066666666666666,
+      "actions": {
+        "strike": 684,
+        "heavy": 68
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 800,
+      "a": "marginal:STR",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        16,
+        14,
+        0
+      ],
+      "meanSeconds": 12.93900679335493,
+      "meanTurns": 21.8,
+      "actions": {
+        "strike": 600,
+        "heavy": 54
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 800,
+      "a": "marginal:REA",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        18,
+        12,
+        0
+      ],
+      "meanSeconds": 14.314315927545797,
+      "meanTurns": 25.366666666666667,
+      "actions": {
+        "strike": 697,
+        "heavy": 64
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 800,
+      "a": "marginal:AGI",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        20,
+        10,
+        0
+      ],
+      "meanSeconds": 13.746068147407506,
+      "meanTurns": 23.633333333333333,
+      "actions": {
+        "strike": 653,
+        "heavy": 55,
+        "trip": 1
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 800,
+      "a": "marginal:END",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        5,
+        25,
+        0
+      ],
+      "meanSeconds": 15.396456361460237,
+      "meanTurns": 25.966666666666665,
+      "actions": {
+        "strike": 722,
+        "heavy": 57
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 800,
+      "a": "marginal:STA",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        4,
+        26,
+        0
+      ],
+      "meanSeconds": 14.556073661144849,
+      "meanTurns": 24.533333333333335,
+      "actions": {
+        "strike": 671,
+        "heavy": 65
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 800,
+      "a": "marginal:VIT",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        14,
+        16,
+        0
+      ],
+      "meanSeconds": 17.108552468069696,
+      "meanTurns": 28.733333333333334,
+      "actions": {
+        "strike": 794,
+        "heavy": 68
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 800,
+      "a": "marginal:PER",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        13,
+        17,
+        0
+      ],
+      "meanSeconds": 14.745001988548148,
+      "meanTurns": 24.733333333333334,
+      "actions": {
+        "strike": 666,
+        "heavy": 76
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 800,
+      "a": "marginal:INT",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        12,
+        18,
+        0
+      ],
+      "meanSeconds": 14.136698021548346,
+      "meanTurns": 23.833333333333332,
+      "actions": {
+        "strike": 659,
+        "heavy": 56
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 800,
+      "a": "marginal:WIL",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        8,
+        22,
+        0
+      ],
+      "meanSeconds": 15.840947937153569,
+      "meanTurns": 26.8,
+      "actions": {
+        "strike": 678,
+        "intimidate": 64,
+        "heavy": 62
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 800,
+      "a": "marginal:SPI",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        4,
+        26,
+        0
+      ],
+      "meanSeconds": 14.560249899454034,
+      "meanTurns": 24.566666666666666,
+      "actions": {
+        "strike": 672,
+        "heavy": 65
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 1600,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        14,
+        16,
+        0
+      ],
+      "meanSeconds": 9.882995771300623,
+      "meanTurns": 23.866666666666667,
+      "actions": {
+        "strike": 666,
+        "heavy": 50
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 1600,
+      "a": "marginal:STR",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        17,
+        13,
+        0
+      ],
+      "meanSeconds": 8.714310708794276,
+      "meanTurns": 21,
+      "actions": {
+        "strike": 578,
+        "heavy": 52
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 1600,
+      "a": "marginal:REA",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        18,
+        12,
+        0
+      ],
+      "meanSeconds": 9.586076018883384,
+      "meanTurns": 24.266666666666666,
+      "actions": {
+        "strike": 672,
+        "heavy": 56
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 1600,
+      "a": "marginal:AGI",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        20,
+        10,
+        0
+      ],
+      "meanSeconds": 9.68513331444401,
+      "meanTurns": 23.833333333333332,
+      "actions": {
+        "strike": 654,
+        "heavy": 61
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 1600,
+      "a": "marginal:END",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        4,
+        26,
+        0
+      ],
+      "meanSeconds": 10.465150049931147,
+      "meanTurns": 25.166666666666668,
+      "actions": {
+        "strike": 708,
+        "heavy": 47
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 1600,
+      "a": "marginal:STA",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        3,
+        27,
+        0
+      ],
+      "meanSeconds": 9.868710565943966,
+      "meanTurns": 23.766666666666666,
+      "actions": {
+        "strike": 663,
+        "heavy": 50
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 1600,
+      "a": "marginal:VIT",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        12,
+        18,
+        0
+      ],
+      "meanSeconds": 11.599772260510836,
+      "meanTurns": 27.9,
+      "actions": {
+        "strike": 776,
+        "heavy": 61
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 1600,
+      "a": "marginal:PER",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        9,
+        21,
+        0
+      ],
+      "meanSeconds": 9.95107326683791,
+      "meanTurns": 23.933333333333334,
+      "actions": {
+        "strike": 660,
+        "heavy": 58
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 1600,
+      "a": "marginal:INT",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        13,
+        17,
+        0
+      ],
+      "meanSeconds": 9.638092076501623,
+      "meanTurns": 23.2,
+      "actions": {
+        "strike": 646,
+        "heavy": 50
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 1600,
+      "a": "marginal:WIL",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        7,
+        23,
+        0
+      ],
+      "meanSeconds": 10.928591542275408,
+      "meanTurns": 26.3,
+      "actions": {
+        "strike": 667,
+        "intimidate": 63,
+        "heavy": 59
+      }
+    },
+    {
+      "group": "marginal",
+      "budget": 1600,
+      "a": "marginal:SPI",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true
+      },
+      "wins": [
+        3,
+        27,
+        0
+      ],
+      "meanSeconds": 9.868890011064535,
+      "meanTurns": 23.766666666666666,
+      "actions": {
+        "strike": 663,
+        "heavy": 50
+      }
+    },
+    {
+      "group": "team",
+      "budget": 200,
+      "a": "balanced",
+      "b": "random",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "fog": true
+      },
+      "wins": [
+        5,
+        5,
+        0
+      ],
+      "meanSeconds": 76.61531734485831,
+      "meanTurns": 260.6,
+      "actions": {
+        "move": 506,
+        "guard": 124,
+        "recover": 193,
+        "strike": 1481,
+        "heavy": 42,
+        "quick": 246,
+        "intimidate": 14
+      }
+    },
+    {
+      "group": "team",
+      "budget": 200,
+      "a": "STR+REA",
+      "b": "END+VIT",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "fog": true
+      },
+      "wins": [
+        9,
+        1,
+        0
+      ],
+      "meanSeconds": 91.70527876511747,
+      "meanTurns": 314.3,
+      "actions": {
+        "move": 558,
+        "guard": 117,
+        "recover": 327,
+        "strike": 1575,
+        "grapple": 119,
+        "escape": 133,
+        "heavy": 21,
+        "quick": 293
+      }
+    },
+    {
+      "group": "team",
+      "budget": 400,
+      "a": "balanced",
+      "b": "random",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "fog": true
+      },
+      "wins": [
+        6,
+        4,
+        0
+      ],
+      "meanSeconds": 38.6178030384694,
+      "meanTurns": 187,
+      "actions": {
+        "move": 346,
+        "strike": 1228,
+        "guard": 91,
+        "heavy": 137,
+        "recover": 59,
+        "intimidate": 9
+      }
+    },
+    {
+      "group": "team",
+      "budget": 400,
+      "a": "STR+REA",
+      "b": "END+VIT",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "fog": true
+      },
+      "wins": [
+        9,
+        1,
+        0
+      ],
+      "meanSeconds": 46.83373385389648,
+      "meanTurns": 235.2,
+      "actions": {
+        "move": 380,
+        "guard": 103,
+        "strike": 1437,
+        "heavy": 86,
+        "grapple": 115,
+        "escape": 139,
+        "recover": 80,
+        "quick": 11,
+        "release": 1
+      }
+    },
+    {
+      "group": "team",
+      "budget": 800,
+      "a": "balanced",
+      "b": "random",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "fog": true
+      },
+      "wins": [
+        7,
+        3,
+        0
+      ],
+      "meanSeconds": 25.29198391646115,
+      "meanTurns": 174.6,
+      "actions": {
+        "move": 317,
+        "strike": 1178,
+        "guard": 91,
+        "heavy": 135,
+        "intimidate": 8,
+        "recover": 17
+      }
+    },
+    {
+      "group": "team",
+      "budget": 800,
+      "a": "STR+REA",
+      "b": "END+VIT",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "fog": true
+      },
+      "wins": [
+        6,
+        4,
+        0
+      ],
+      "meanSeconds": 29.921666794565084,
+      "meanTurns": 204.5,
+      "actions": {
+        "move": 299,
+        "strike": 1304,
+        "guard": 67,
+        "grapple": 89,
+        "escape": 81,
+        "heavy": 173,
+        "recover": 31,
+        "release": 1
+      }
+    },
+    {
+      "group": "team",
+      "budget": 1600,
+      "a": "balanced",
+      "b": "random",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "fog": true
+      },
+      "wins": [
+        6,
+        4,
+        0
+      ],
+      "meanSeconds": 16.022667861838677,
+      "meanTurns": 167.3,
+      "actions": {
+        "move": 309,
+        "strike": 1085,
+        "guard": 98,
+        "heavy": 175,
+        "intimidate": 5,
+        "recover": 1
+      }
+    },
+    {
+      "group": "team",
+      "budget": 1600,
+      "a": "STR+REA",
+      "b": "END+VIT",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "fog": true
+      },
+      "wins": [
+        10,
+        0,
+        0
+      ],
+      "meanSeconds": 18.727400488287934,
+      "meanTurns": 195.8,
+      "actions": {
+        "move": 320,
+        "guard": 95,
+        "strike": 1204,
+        "grapple": 105,
+        "escape": 80,
+        "heavy": 151,
+        "release": 1,
+        "recover": 2
+      }
+    },
+    {
+      "group": "cross",
+      "budget": 400,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "budgetB": 200
+      },
+      "wins": [
+        8,
+        2,
+        0
+      ],
+      "meanSeconds": 52.779186959862216,
+      "meanTurns": 104.8,
+      "actions": {
+        "move": 215,
+        "guard": 112,
+        "heavy": 351,
+        "strike": 266,
+        "recover": 74,
+        "quick": 30
+      }
+    },
+    {
+      "group": "cross",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 5,
+      "sizeB": 1,
+      "n": 10,
+      "options": {
+        "budgetB": 400
+      },
+      "wins": [
+        1,
+        9,
+        0
+      ],
+      "meanSeconds": 54.53870304840326,
+      "meanTurns": 107.9,
+      "actions": {
+        "move": 210,
+        "guard": 99,
+        "heavy": 379,
+        "strike": 274,
+        "recover": 79,
+        "quick": 38
+      }
+    },
+    {
+      "group": "cross",
+      "budget": 800,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "budgetB": 200
+      },
+      "wins": [
+        10,
+        0,
+        0
+      ],
+      "meanSeconds": 15.410906919187047,
+      "meanTurns": 40.5,
+      "actions": {
+        "move": 124,
+        "guard": 42,
+        "strike": 98,
+        "heavy": 123,
+        "recover": 18
+      }
+    },
+    {
+      "group": "cross",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 5,
+      "sizeB": 1,
+      "n": 10,
+      "options": {
+        "budgetB": 800
+      },
+      "wins": [
+        0,
+        10,
+        0
+      ],
+      "meanSeconds": 15.745832039968935,
+      "meanTurns": 40.8,
+      "actions": {
+        "move": 126,
+        "guard": 42,
+        "heavy": 120,
+        "strike": 102,
+        "recover": 18
+      }
+    },
+    {
+      "group": "cross",
+      "budget": 1600,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "budgetB": 200
+      },
+      "wins": [
+        10,
+        0,
+        0
+      ],
+      "meanSeconds": 6.368001442667006,
+      "meanTurns": 23.6,
+      "actions": {
+        "move": 95,
+        "strike": 50,
+        "heavy": 60,
+        "guard": 30,
+        "recover": 1
+      }
+    },
+    {
+      "group": "cross",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 5,
+      "sizeB": 1,
+      "n": 10,
+      "options": {
+        "budgetB": 1600
+      },
+      "wins": [
+        0,
+        10,
+        0
+      ],
+      "meanSeconds": 7.157973745449139,
+      "meanTurns": 25.2,
+      "actions": {
+        "move": 102,
+        "strike": 52,
+        "guard": 29,
+        "heavy": 63,
+        "recover": 6
+      }
+    },
+    {
+      "group": "policy",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "aiA": "basic",
+        "aiB": "standard",
+        "fog": true
+      },
+      "wins": [
+        3,
+        7,
+        0
+      ],
+      "meanSeconds": 77.85725911589847,
+      "meanTurns": 245,
+      "actions": {
+        "move": 408,
+        "guard": 115,
+        "recover": 163,
+        "strike": 1539,
+        "heavy": 22,
+        "quick": 203
+      }
+    },
+    {
+      "group": "policy",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "aiA": "standard",
+        "aiB": "basic",
+        "fog": true
+      },
+      "wins": [
+        5,
+        5,
+        0
+      ],
+      "meanSeconds": 84.76921622634117,
+      "meanTurns": 257.5,
+      "actions": {
+        "move": 442,
+        "guard": 115,
+        "recover": 171,
+        "strike": 1512,
+        "heavy": 35,
+        "quick": 300
+      }
+    },
+    {
+      "group": "policy",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "aiA": "basic",
+        "aiB": "tactical",
+        "fog": true
+      },
+      "wins": [
+        1,
+        9,
+        0
+      ],
+      "meanSeconds": 77.53542370648522,
+      "meanTurns": 216.7,
+      "actions": {
+        "move": 437,
+        "guard": 115,
+        "recover": 184,
+        "strike": 647,
+        "heavy": 610,
+        "quick": 174
+      }
+    },
+    {
+      "group": "policy",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "aiA": "tactical",
+        "aiB": "basic",
+        "fog": true
+      },
+      "wins": [
+        7,
+        3,
+        0
+      ],
+      "meanSeconds": 71.82247760754525,
+      "meanTurns": 204.8,
+      "actions": {
+        "move": 381,
+        "guard": 110,
+        "recover": 152,
+        "strike": 660,
+        "heavy": 594,
+        "quick": 151
+      }
+    },
+    {
+      "group": "policy",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "aiA": "standard",
+        "aiB": "tactical",
+        "fog": true
+      },
+      "wins": [
+        3,
+        7,
+        0
+      ],
+      "meanSeconds": 76.22606471391171,
+      "meanTurns": 227.4,
+      "actions": {
+        "move": 506,
+        "guard": 136,
+        "recover": 207,
+        "strike": 712,
+        "heavy": 604,
+        "quick": 109
+      }
+    },
+    {
+      "group": "policy",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 5,
+      "sizeB": 5,
+      "n": 10,
+      "options": {
+        "aiA": "tactical",
+        "aiB": "standard",
+        "fog": true
+      },
+      "wins": [
+        5,
+        5,
+        0
+      ],
+      "meanSeconds": 77.40255700734538,
+      "meanTurns": 229.9,
+      "actions": {
+        "move": 537,
+        "guard": 134,
+        "recover": 210,
+        "heavy": 582,
+        "strike": 741,
+        "quick": 95
+      }
+    },
+    {
+      "group": "fatigue",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 1,
+      "sizeB": 1,
+      "n": 30,
+      "options": {
+        "open": true,
+        "close": true,
+        "tired": true
+      },
+      "wins": [
+        0,
+        30,
+        0
+      ],
+      "meanSeconds": 42.34411421115632,
+      "meanTurns": 33.06666666666667,
+      "actions": {
+        "strike": 448,
+        "quick": 544
+      }
+    },
+    {
+      "group": "objective",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 2,
+      "sizeB": 2,
+      "n": 10,
+      "options": {
+        "objective": "survive",
+        "fog": true
+      },
+      "wins": [
+        10,
+        0,
+        0
+      ],
+      "meanSeconds": 30,
+      "meanTurns": 56,
+      "actions": {
+        "move": 126,
+        "guard": 52,
+        "heavy": 7,
+        "strike": 352,
+        "recover": 23
+      }
+    },
+    {
+      "group": "objective",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 2,
+      "sizeB": 2,
+      "n": 10,
+      "options": {
+        "objective": "escape",
+        "fog": true
+      },
+      "wins": [
+        10,
+        0,
+        0
+      ],
+      "meanSeconds": 10.84747404962691,
+      "meanTurns": 24.1,
+      "actions": {
+        "move": 103,
+        "guard": 56,
+        "heavy": 2,
+        "strike": 69,
+        "recover": 11
+      }
+    },
+    {
+      "group": "objective",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 2,
+      "sizeB": 2,
+      "n": 10,
+      "options": {
+        "objective": "control",
+        "fog": true
+      },
+      "wins": [
+        0,
+        1,
+        9
+      ],
+      "meanSeconds": 30,
+      "meanTurns": 57.1,
+      "actions": {
+        "move": 116,
+        "guard": 61,
+        "strike": 373,
+        "recover": 16,
+        "heavy": 5
+      }
+    },
+    {
+      "group": "objective",
+      "budget": 200,
+      "a": "balanced",
+      "b": "balanced",
+      "sizeA": 2,
+      "sizeB": 2,
+      "n": 10,
+      "options": {
+        "objective": "protect",
+        "fog": true
+      },
+      "wins": [
+        9,
+        1,
+        0
+      ],
+      "meanSeconds": 29.363405431212733,
+      "meanTurns": 55,
+      "actions": {
+        "move": 123,
+        "guard": 52,
+        "heavy": 7,
+        "strike": 346,
+        "recover": 22
+      }
+    }
+  ]
+}

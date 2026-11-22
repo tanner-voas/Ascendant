@@ -1,4 +1,4 @@
-# Ascendant — Tactical Battleground (v0.1.9)
+# Ascendant — Tactical Battleground (v0.1.10)
 
 Initial, classless 5v5 prototype for a future LitRPG cultivation role-playing game, loosely inspired by Pathfinder. No classes, magic, feats, gear, levels, or unique abilities yet. This is a standalone app and a lazy-loaded AppLauncher module; no external dependencies or backend.
 
@@ -122,3 +122,7 @@ Open **Simulation laboratory** from the normal setup screen. This is a separate 
 - Results include wins/draws, durations, decisions/events, attack damage (before HP overkill clipping), received damage, successful and failed contests, critical successes, survivors, final resource fractions, direct progressive-resource expenditure, action and logged condition counts, interruptions, and a matchup heatmap. Export aggregate JSON (includes full experiment plan and seed schedule) or CSV. Reproduce the first battle in any completed matchup or enter a custom seed: a separate worker reruns it and records decision-boundary snapshots plus recent event log (up to 50,000 entries). Replay is read-only and independent of the ordinary saved battle. Exact reproducibility is within the same engine version.
 
 Current limitations: scenario editing covers 2D rectangles and fixed positions rather than an unrestricted terrain authoring suite; objectives use straightforward tactical heuristics; results are aggregates, not a log of every duel. Spirit remains largely unused in mundane combat. Comprehensive balancing and higher-tier tuning belong to v0.1.10. No new classes, gear or spells. Both distribution modes automatically package the worker and modules; AppLauncher needs only its submodule pointer updated.
+
+## v0.1.10 — Balance, optimization and consolidation
+
+The ten-stat mundane prototype is now consolidated. See [the reproducible balance audit](docs/balance/REPORT.md) and the archived per-matchup aggregates. Run `node scripts/balance-audit.mjs 30` to repeat the final audit and `npm test` for regression checks. Current formulas are provisional: the audit narrowed some imbalances but did not equalize all attributes. Roster and battle formats are unchanged; future outcomes from older saves can differ under the revised rules. The entire release history below documents the mechanics as they existed at each release. No class, equipment, spell, or progression system has been added.
