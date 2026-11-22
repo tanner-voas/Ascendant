@@ -1,4 +1,4 @@
-# Ascendant — Tactical Battleground (v0.1.13)
+# Ascendant — Tactical Battleground (v0.1.14)
 
 Initial, classless 5v5 prototype for a future LitRPG cultivation role-playing game, loosely inspired by Pathfinder. No classes, magic, feats, gear, levels, or unique abilities yet. This is a standalone app and a lazy-loaded AppLauncher module; no external dependencies or backend.
 
@@ -151,3 +151,12 @@ Enemy preparation and recovery events are not shown in the player's combat timel
 - All standard characters occupy a 0.48-metre radius and have 1.9-metre unarmed reach. Engagement is an explicit, **free and directed** choice: a character can engage one visible enemy in reach, and being engaged by an enemy does not automatically engage them back. Strike, Heavy strike, Quick strike, Shove, Trip and Grapple require the attacker to be engaged with their intended target. These buttons are marked with a small red E. Intimidation, observation, defense and recovery are independent of engagement.
 - Engaged characters automatically follow targets moving outside comfortable reach, using Careful, Walk, Run or Sprint in that order according to the minimum speed required. Following uses genuine Physical and Mental resources, delays other pending actions or future readiness, and ends when the target cannot be followed or affordable movement is exhausted. A directed red arrow on the battlefield indicates each currently observable engagement; no enemy action details are revealed.
 - Existing v0.1.12 saved battles migrate without engagement relationships. New in-progress tracked movements and engagement links are included in snapshots. The simulation laboratory and normal battles share the new rules; all calibration coefficients remain provisional.
+
+
+## v0.1.14 — Movement/engagement stress audit and fast headless runner
+
+`src/headless.js` drives the **same** battle engine and scheduler as the UI, one deterministic decision or authoritative timeline event at a time, without creating DOM elements, waiting for timers, displaying animations or using an alternate simplified combat model. It can be used with ordinary five-versus-five fights and experimental scenarios with up to ten combatants per side. The headless runner can validate resources, geometry, engagement references and scheduler timestamps after **every** transition.
+
+Run `npm run test:headless` for fast focused engine/UI event-handler regression tests; `npm run stress:movement` for 20 reproducible 5v5 fights over all 20 arenas; or `npm run stress:movement:deep` for 200 randomized asymmetric matchups (long-running). Customize via `node scripts/stress-movement-engagement.mjs --seed 1234 --cases 100 --mixed`. The script prints a seed and case number if a randomized case fails, along with a machine-readable summary when successful. A full audit record is in `docs/stress-v0.1.14.md`. These runs perform no rendering and do not wait for wall-clock animation.
+
+The audit fixed stale directional engagement links on knockout, distinguished global AI Auto-play from individually automated allies for contact engagement, and restored experimental 1–10-per-team save compatibility (including experimental stat budgets and rule coefficients). The fixed-size team strips now paginate by displayed team slots, even when characters are down, and experimental rematches preserve their team sizes/rules. Existing ordinary v0.1.x saves continue to use the original validation rules. Tests also exercise **actual app render markup and delegated input handlers** via a synthetic DOM. A real iOS Safari browser/layout and touch test is still required.
