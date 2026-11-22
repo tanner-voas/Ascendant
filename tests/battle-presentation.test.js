@@ -1,0 +1,71 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {newBattle, balanced, dist, clearSegment} from '../src/engine.js';
+import {makeMap} from '../src/maps.js';
+import {canSee, perceivedTo} from '../src/battlefield.js';
+import {snapshot} from '../src/persistence.js';
+
+const roster=()=>Array.from({length:2},(_,side)=>Array.from({length:5},(_,n)=>({name:`${side?'Enemy':'Ally'} ${n+1}`,stats:balanced()})));
+
+test('player UI: only perceived enemy identity, allied resources and timing, character-click movement',async()=>{
+ const team=roster(),map=makeMap(0,222,{fog:false}),battle=newBattle(team,map,91);
+ const ally=battle.units[0],enemy=battle.units[5];
+ battle.active='A1';ally.next=battle.time;ally.hp=ally.max.hp*.62;ally.physical=ally.max.physical*.43;
+ let position=null;
+ for(let d=3;d<=8&&!position;d+=.5)for(let i=0;i<24;i++){
+  const angle=2*Math.PI*i/24,p={x:ally.x+Math.cos(angle)*d,y:ally.y+Math.sin(angle)*d};
+  if(p.x<1||p.x>=map.w-1||p.y<1||p.y>=map.h-1)continue;
+  if(battle.units.some(u=>u!==enemy&&dist(p,u)<1.2))continue;
+  if(!clearSegment(map,p,p)||!canSee(map,ally,p))continue;
+  position=p;break;
+ }
+ assert.ok(position,'a visible valid enemy location is needed');Object.assign(enemy,position);
+ assert.ok(perceivedTo(battle,0,enemy));
+ for(const u of battle.units.filter(u=>u.team===1&&u!==enemy))assert.equal(perceivedTo(battle,0,u),false);
+ enemy.hp=enemy.max.hp*.12;
+ enemy.next=battle.time+.03;
+ battle.aiDecisions[enemy.id]={time:1.01,action:'heavy',target:'A1',reason:'SECRET ENEMY AI POLICY'};
+ const storage=new Map([['ascendant.battle.v1',JSON.stringify(snapshot(battle,team,{mode:'idle',moveKind:'run'}))]]);
+ const handlers={};let boardEvents={};const svg={addEventListener:(name,fn)=>boardEvents[name]=fn,setPointerCapture(){},querySelector(){return null;},setAttribute(){},createSVGPoint(){return {x:0,y:0,matrixTransform(){return {x:this.x,y:this.y};}}},getScreenCTM(){return {inverse(){return {};}}}};
+ const root={innerHTML:'',classList:{add(){}},addEventListener:(name,fn)=>handlers[name]=fn,querySelector(k){return k==='#ascendant-board'?svg:null;}};
+ globalThis.document={querySelector:()=>root,body:{classList:{add(){}}},hidden:true,addEventListener(){}};
+ globalThis.window={scrollY:0,scrollTo(){},addEventListener(){}};
+ globalThis.localStorage={getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,v)};
+ await import('../src/app.js');
+ const click=dataset=>handlers.click({target:{closest:()=>({dataset,disabled:false})}});
+ click({do:'resume'});
+ assert.match(root.innerHTML,/YOUR TURN/);
+ assert.match(root.innerHTML,/aria-label="Allied turns and resources"/);
+ const top=root.innerHTML.match(/<div class="ascendant-timeline"[\s\S]*?<\/div>/)?.[0];
+ assert.ok(top);
+ assert.equal((top.match(/class="ascendant-top-resources"/g)||[]).length,5);
+ assert.doesNotMatch(top, /data-unit="E\d"|Enemy 1|SECRET/);
+ assert.match(top,/height:62%/);assert.match(top,/height:43%/);
+ const list=root.innerHTML.match(/<div class="ascendant-contact-strip"[\s\S]*?<\/div>/)?.[0];
+ assert.ok(list,'perceived enemy strip is present');
+ assert.match(list,/data-unit="E1"/);assert.match(list,/Enemy 1/);
+ assert.doesNotMatch(list,/data-unit="E2"|\d\.\ds|hp|physical|mental|resolve|recovery|preparation|execution/);
+ const token=root.innerHTML.match(/<g data-unit="E1"[^>]*>([\s\S]*?)<\/g>/)?.[1];
+ assert.ok(token,'perceived opponent has a board token');
+ assert.doesNotMatch(token,/<rect|<title|SECRET/);
+ assert.doesNotMatch(root.innerHTML,/SECRET ENEMY AI POLICY/);
+ assert.doesNotMatch(root.innerHTML,/data-board-unit="E2"/);
+ assert.doesNotMatch(root.innerHTML,/Recorded battlefield position/);
+ assert.match(root.innerHTML,/Full replay and raw battle export unlock when combat ends/);
+ const before=JSON.parse(storage.get('ascendant.battle.v1'));
+ assert.equal(before.ui.mode,'route','old save defaults to Move');
+ click({unit:'E1'});
+ const after=JSON.parse(storage.get('ascendant.battle.v1'));
+ assert.equal(after.ui.targetId,'E1');
+ assert.deepEqual(after.ui.moveGoal,{unitId:'E1'});
+ assert.ok(after.ui.path.length>1,'a clicked perceived enemy produces a path');
+ const end=after.ui.path.at(-1);
+ assert.ok(dist(end,enemy)>=.5,'route does not try to occupy the target');
+ click({movement:'walk'});
+ assert.equal(JSON.parse(storage.get('ascendant.battle.v1')).ui.moveGoal.unitId,'E1');
+ // The battlefield pin uses the same destination behavior as the upper contact tag.
+ click({do:'selectMove'});click({do:'selectMove'});
+ const pin={button:0,pointerId:7,clientX:enemy.x,clientY:enemy.y,target:{closest:sel=>sel==='[data-unit]'?{dataset:{unit:'E1'}}:null}};
+ boardEvents.pointerdown(pin);boardEvents.pointerup(pin);
+ assert.equal(JSON.parse(storage.get('ascendant.battle.v1')).ui.moveGoal?.unitId,'E1');
+});
