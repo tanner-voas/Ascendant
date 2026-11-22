@@ -27,6 +27,25 @@ test('eight-a-side battle renders two rows, pages dead allies, and gates melee b
  assert.equal((root.innerHTML.match(/class="ascendant-team-strip /g)||[]).length,2);
  assert.match(root.innerHTML,/aria-label="Allies"/);
  assert.match(root.innerHTML,/aria-label="Enemies"/);
+ // The most-used controls are reached immediately after the map, before
+ // expandable timeline and inspector content.
+ assert.ok(root.innerHTML.indexOf('class="ascendant-board-wrap"')<root.innerHTML.indexOf('class="ascendant-live-actions"'));
+ assert.ok(root.innerHTML.indexOf('class="ascendant-live-actions"')<root.innerHTML.indexOf('class="ascendant-phase-panel'));
+ assert.match(root.innerHTML,/data-ui-section="timeline"/);
+ assert.match(root.innerHTML,/data-ui-section="more"/);
+ assert.match(root.innerHTML,/data-ui-section="character"/);
+ assert.match(root.innerHTML,/data-ui-section="tactics"/);
+ assert.match(root.innerHTML,/data-ui-section="log"/);
+ assert.doesNotMatch(root.innerHTML,/class="ascendant-teams"/);
+ assert.doesNotMatch(root.innerHTML,/<span>Preparation<\/span>|move · execution/);
+ assert.match(root.innerHTML,/data-action="strike"/);
+ assert.match(root.innerHTML,/data-action="intimidate"/);
+ assert.match(root.innerHTML,/data-action="stand"/);
+ // An expanded drawer must remain open if a control rerenders the battle.
+ handlers.toggle({target:{dataset:{uiSection:'timeline'},open:true}});
+ click({movement:'walk'});
+ assert.match(root.innerHTML,/<details class="ascendant-phase-panel[^>]+data-ui-section="timeline" open>/);
+
  assert.match(root.innerHTML,/data-page-side="0"/);
  assert.match(root.innerHTML,/data-page-side="1"/);
  assert.match(root.innerHTML,/class="ascendant-engage-required"/);

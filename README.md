@@ -1,4 +1,4 @@
-# Ascendant — Tactical Battleground (v0.1.14)
+# Ascendant — Tactical Battleground (v0.1.15)
 
 Initial, classless 5v5 prototype for a future LitRPG cultivation role-playing game, loosely inspired by Pathfinder. No classes, magic, feats, gear, levels, or unique abilities yet. This is a standalone app and a lazy-loaded AppLauncher module; no external dependencies or backend.
 
@@ -160,3 +160,12 @@ Enemy preparation and recovery events are not shown in the player's combat timel
 Run `npm run test:headless` for fast focused engine/UI event-handler regression tests; `npm run stress:movement` for 20 reproducible 5v5 fights over all 20 arenas; or `npm run stress:movement:deep` for 200 randomized asymmetric matchups (long-running). Customize via `node scripts/stress-movement-engagement.mjs --seed 1234 --cases 100 --mixed`. The script prints a seed and case number if a randomized case fails, along with a machine-readable summary when successful. A full audit record is in `docs/stress-v0.1.14.md`. These runs perform no rendering and do not wait for wall-clock animation.
 
 The audit fixed stale directional engagement links on knockout, distinguished global AI Auto-play from individually automated allies for contact engagement, and restored experimental 1–10-per-team save compatibility (including experimental stat budgets and rule coefficients). The fixed-size team strips now paginate by displayed team slots, even when characters are down, and experimental rematches preserve their team sizes/rules. Existing ordinary v0.1.x saves continue to use the original validation rules. Tests also exercise **actual app render markup and delegated input handlers** via a synthetic DOM. A real iOS Safari browser/layout and touch test is still required.
+
+
+## v0.1.15 — Compact battle UI
+
+The tactical battlefield, combat engine, movement and directional engagement rules are unchanged. During live battles, the action dock now appears immediately after the map instead of below an always-expanded timeline. The default action row shows Move, Strike, Quick strike, Heavy strike, Guard and Recover; the remaining combat actions are under **More actions** (Control and Utility). The movement mode picker and confirm preview remain inline. Playback speed, pause, and Auto-play are in the action dock header.
+
+The allied timeline is now a compact one-line summary; opening **Timeline** reveals per-ally phase bars. Labels use `Move[E]`, `Strike[P]`, and `Strike[R]` rather than verbose phase descriptions. For discrete attacks and controls, the action's execution interval is represented as wind-up and its actual resolution as an instantaneous `[E]` marker, preserving existing simulation timing. Continuous actions retain a visible execution interval. This is a presentation change, not a change to attack timings or damage.
+
+**Character**, **Team tactics**, **Battle log**, **Replay** and **Battle options** are expandable instead of fully rendering as a long second column of controls. Detailed combat forecasts are nested inside **Action options**. The duplicate team roster at the bottom of the battlefield has been removed: select characters from the two fixed rows or map. Enemy data remains limited to perceived identity and position. No controls or mechanical capabilities have been removed.

@@ -51,7 +51,7 @@ test('player UI: fixed ally and enemy rows, private opponents and character-clic
  assert.doesNotMatch(root.innerHTML,/SECRET ENEMY AI POLICY/);
  assert.doesNotMatch(root.innerHTML,/data-board-unit="E2"/);
  assert.doesNotMatch(root.innerHTML,/Recorded battlefield position/);
- assert.match(root.innerHTML,/Full replay and raw battle export unlock when combat ends/);
+ assert.doesNotMatch(root.innerHTML,/data-do="replayPrev"/);
  const before=JSON.parse(storage.get('ascendant.battle.v1'));
  assert.equal(before.ui.mode,'route','old save defaults to Move');
  click({unit:'E1'});

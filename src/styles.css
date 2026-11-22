@@ -58,3 +58,60 @@ body.ascendant-mode{margin:0;background:#111d22;color:#e3e9e6;font:15px/1.4 -app
 .ascendant-engagement-actions button{min-height:30px;padding:3px 7px;font-size:11px;border-color:#945453;color:#f4b6b0}
 
 .ascendant-strip-people .ally.dead{opacity:.48}
+
+/* v0.1.15 — Mobile battle-first layout. Collapsible detail does not affect simulation. */
+.ascendant-ui-fold{border:1px solid #3d5358;border-radius:9px;background:#192a30;min-width:0}
+.ascendant-ui-fold>summary{display:flex;align-items:center;gap:8px;min-height:39px;padding:8px 10px;cursor:pointer;list-style:none;color:#e3e9e6;font-size:13px}
+.ascendant-ui-fold>summary::-webkit-details-marker{display:none}
+.ascendant-ui-fold>summary:before{content:'›';color:#9cb7b4;font-weight:700;font-size:19px;line-height:12px;transition:transform .12s ease}
+.ascendant-ui-fold[open]>summary:before{transform:rotate(90deg)}
+.ascendant-ui-fold>summary b{font-weight:600;white-space:nowrap}
+.ascendant-ui-fold>summary span,.ascendant-ui-fold>summary small{color:#9fb7b6;font-size:11px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400}
+.ascendant-ui-fold>summary span{flex:1}
+.ascendant-ui-fold>summary:focus-visible{outline:2px solid #8be6bf;outline-offset:2px}
+.ascendant-phase-panel.ascendant-ui-fold{padding:0;margin:7px 0;}
+.ascendant-phase-panel .ascendant-phase-rows{padding:0 9px 4px}
+.ascendant-phase-panel .ascendant-phase-row{grid-template-columns:35px minmax(20px,1fr) minmax(80px,28%);gap:6px;margin:2px 0}
+.ascendant-phase-panel .ascendant-phase-row button{padding:2px;min-height:24px}
+.ascendant-phase-panel .ascendant-phase-row small{font-size:11px;color:#c8d7d5}
+.ascendant-phase-panel .ascendant-phase-track{height:10px}
+.ascendant-phase-panel .ascendant-phase-track i{height:8px}
+.ascendant-phase-panel .ascendant-phase-track .execute-instant{background:#fff2b5;width:2px;min-width:2px;z-index:2;box-shadow:0 0 3px #fff0a0}
+.ascendant-phase-panel .ascendant-phase-note{padding:0 10px 8px;font-size:11px;line-height:1.3;margin:4px 0}
+.ascendant-timeline-glance{flex:1}
+.ascendant-ui-expand{flex:0 0 auto!important}
+.ascendant-action-head{display:flex;flex-wrap:wrap;margin-bottom:5px;gap:5px}
+.ascendant-action-head h3{font-size:15px;line-height:1.2;margin:0 auto 0 0}
+.ascendant-action-head .ascendant-clock-tools{margin:0;display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:11px}
+.ascendant-action-head .ascendant-clock-tools button{min-height:32px;min-width:44px;padding:4px 6px;font-size:12px}
+.ascendant-action-head .ascendant-clock-tools label{font-size:11px;display:flex;align-items:center;gap:3px}
+.ascendant-action-head .ascendant-clock-tools select{min-width:48px;padding:4px 2px;font-size:12px;min-height:30px}
+.ascendant-action-head .ascendant-clock-tools input{width:15px;height:15px;margin:0}
+.ascendant-live-actions{margin-top:9px;padding-top:8px}
+.ascendant-primary-actions{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:5px 0}
+.ascendant-primary-actions button{min-height:40px;text-align:center;padding:5px 4px;font-size:12px}
+.ascendant-more-actions{margin:6px 0 8px}
+.ascendant-more-actions>summary{min-height:35px;padding:5px 9px}
+.ascendant-more-actions .ascendant-action-group{padding:0 9px 8px}
+.ascendant-more-actions .ascendant-action-group>span{font-size:11px;color:#a2b7b5}
+.ascendant-more-actions .ascendant-actions{grid-template-columns:repeat(3,minmax(0,1fr));margin:4px 0;gap:5px}
+.ascendant-more-actions .ascendant-actions button{font-size:12px;min-height:39px;padding:5px;text-align:center}
+.ascendant-engagement-actions{margin:3px 0;min-height:0}
+.ascendant-engagement-actions>span:empty{display:none}
+.ascendant-ui-fold-list{display:grid;gap:6px;margin:8px 0 0}
+.ascendant-detail-fold>summary{min-height:39px}
+.ascendant-detail-fold .ascendant-fold-body{padding:0 9px 10px}
+.ascendant-detail-fold .ascendant-detail{margin:0;padding:0;border:0;background:transparent}
+.ascendant-detail-fold .ascendant-tactical-panel{margin:0;padding:5px 0;border:0;background:transparent}
+.ascendant-detail-fold .ascendant-log{max-height:300px;overflow:auto;margin-top:7px}
+.ascendant-detail-fold .ascendant-buttons{margin:4px 0}
+.ascendant-advanced.ascendant-ui-fold{margin:8px 0 0}
+.ascendant-advanced.ascendant-ui-fold>summary{padding:6px 9px}
+.ascendant-advanced.ascendant-ui-fold>*:not(summary){margin-left:9px;margin-right:9px}
+.ascendant-nested-fold{margin:8px 0;border-top:1px solid #3d5358}
+.ascendant-nested-fold>summary{cursor:pointer;padding:7px 0;color:#b6d7d1;font-size:12px}
+.ascendant-nested-fold .ascendant-actions{margin:3px 0}
+.ascendant-target{margin:5px 0 2px}
+.ascendant-standby{padding:6px 0}
+@media(min-width:700px){.ascendant-action-head .ascendant-clock-tools{margin-left:auto}.ascendant-primary-actions{grid-template-columns:repeat(6,minmax(0,1fr))}.ascendant-phase-panel .ascendant-phase-row{grid-template-columns:48px minmax(40px,1fr) minmax(112px,22%)}}
+@media(max-width:390px){.ascendant-action-head .ascendant-clock-tools{width:100%}.ascendant-phase-panel .ascendant-phase-row{grid-template-columns:32px minmax(20px,1fr) minmax(70px,31%)}.ascendant-ui-fold>summary small{max-width:55%}}
