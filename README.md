@@ -1,4 +1,4 @@
-# Ascendant — Tactical Battleground (v0.1.3)
+# Ascendant — Tactical Battleground (v0.1.4)
 
 Initial, classless 5v5 prototype for a future LitRPG cultivation role-playing game, loosely inspired by Pathfinder. No classes, magic, feats, gear, levels, or unique abilities yet. This is a standalone app and a lazy-loaded AppLauncher module; no external dependencies or backend.
 
@@ -67,3 +67,14 @@ The default defensive policy is Dodge; choose Dodge, Brace, Counter, or None at 
 The timeline panel shows all pending phases and anticipated completion times, with dashed paths/telegraphs on the board. Toggle event-by-event resolution, pause AI, and step pending events manually. The latest 180 event/decision frames are retained for read-only playback; this is not an undo system or a full battle recording. Pending jobs, reaction states, PRNG, follow-up state, and recent frames persist in saved battles. Old v0.1.1/v0.1.2 saves migrate to the new scheduler; continuing them can produce different results from their old rules. Existing roster format and app ID are unchanged.
 
 No classes, spells, feats, equipment, advancement, or new player attributes have been added. Timing/reaction balance is provisional.
+
+## v0.1.4 — Damage and defenses
+
+- `src/damage.js` is the common typed damage engine. Its 13 supported types are blunt, slashing, piercing, heat, cold, electrical, corrosive, sonic, toxic, arcane, mental, vital and spatial. Only blunt damage is currently delivered by the fixed unarmed attacks; there are still no spells, classes or equipment.
+- Innate DR = `2*(B/20)^0.8`; innate RES = `0.6*(B/20)^0.75/(4+(B/20)^0.75)`. B is END, except for mental damage where it is `(END+WIL)/2`. Defensive sources add DR and multiply remaining damage fractions. Guard and bodily reactions apply only to physical impact types.
+- `resolveDamage(components, profile)` resolves a single simultaneous impact. Each component has a type, raw damage, and optional penetration object (`drFlat`, `drRatio`, `resFlat`, `resRatio`; RES fractions are 0–1). Proportional penetration applies first, followed by flat penetration. Allocate effective DR by the raw damage fraction of that component, subtract it, then apply RES. Each separate impact receives its own DR budget. Zero damage is permitted. The result contains per-component defenses, effective penetration, reduction, resistance and final damage.
+- Strike, quick strike, heavy strike, interceptions and counters use the typed engine. Heavy strike ignores 1 DR plus 8% proportional DR and 10% proportional RES (proportional applied before flat). Coefficients are provisional, pending the balance release.
+- Opposed d20 degrees: margin >=12 critical success (1.4x raw damage on damaging attacks), >=0 ordinary success, <=-12 critical failure (ordinary attack attempts cause 5 off-balance on the attacker), otherwise failure. No automatic hit/miss based on natural rolls. Existing strong-hit interruption and forced-displacement rules remain.
+- Block trades more physical energy for reduced incoming impact (STR/END); parry trades mental energy for a precision-based defensive contest (REA/AGI/PER). Dodge, brace and counter remain available. All share the same reaction allowance and facing restrictions.
+- Forecasts enumerate opposed d20s and 2d6 using the actual damage engine without consuming random state. They display hit and critical probabilities, expected raw / DR / RES / final damage, conditional damage range and relevant penetration. The inspector exposes all 13 defenses; combat logs expose the exact precision contributions and typed damage breakdown. These are current-state forecasts, not predictions of changes before impact.
+- Existing v1 save schema is retained; derived defenses are recalculated during restore, and existing jobs resolve under the updated rules. No launcher source changes required.
