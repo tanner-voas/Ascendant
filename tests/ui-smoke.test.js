@@ -17,7 +17,7 @@ test('setup, start, movement planner controls, commit, facing, and resume render
  const change=(id,value)=>events.change({target:{id,value,checked:value}});
  const saved=()=>JSON.parse(storage.get('ascendant.battle.v1'));
  const tap=(x,y,dataset={})=>{const target={closest:s=>s==='[data-unit]'&&dataset.unit?{dataset}:s==='[data-waypoint]'&&dataset.waypoint?{dataset}:s==='[data-insert]'&&dataset.insert?{dataset}:null};const ev={button:0,pointerId:1,clientX:x,clientY:y,target};boardEvents.pointerdown(ev);boardEvents.pointerup(ev);};
- assert.match(root.innerHTML,/v0\.1\.8/);events.input({target:{id:'ascendant-seed',value:'42',dataset:{}}});await change('ascendant-fog',false);button({do:'start'});button({do:'pause'});
+ assert.match(root.innerHTML,/v0\.1\.9/);events.input({target:{id:'ascendant-seed',value:'42',dataset:{}}});await change('ascendant-fog',false);button({do:'start'});button({do:'pause'});
  for(let i=0;i<10&&!saved().state.active.startsWith('A');i++)button({do:'step'});
  assert.match(root.innerHTML,/YOUR TURN/);assert.match(root.innerHTML,/Damage defenses by type/);assert.match(root.innerHTML,/Conditions/);assert.match(root.innerHTML,/data-action="grapple"/);assert.match(root.innerHTML,/data-action="intimidate"/);assert.match(root.innerHTML,/data-action="stand"/);assert.match(root.innerHTML,/value="block"/);assert.match(root.innerHTML,/value="parry"/);assert.match(root.innerHTML,/Momentum/);assert.match(root.innerHTML,/data-movement="sprint"/);
  await change('ascendant-effort','0.7');await change('ascendant-push','physical');assert.deepEqual(saved().ui.push,{effort:.7,push:'physical'});await change('ascendant-effort','1');await change('ascendant-push','none');button({movement:'sprint'});assert.equal(saved().ui.moveKind,'sprint');

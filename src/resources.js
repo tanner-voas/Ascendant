@@ -1,3 +1,4 @@
+import {coefficient} from './lab-rules.js';
 import {severity,channel,conditionStep} from './conditions.js';
 // Resource rules: absolute HP/mana, progressive physical/mental/resolve.
 // Effort is voluntary output intensity, not an extra attribute or resource.
@@ -25,7 +26,7 @@ export const effortOutput=e=>.40+.60*e;
 export function affordable(c,cost){return Object.fromEntries(['physical','mental','resolve'].map(k=>[k,Math.min(c[k],Math.max(0,cost[k]||0))]));}
 export function actionExpenditure(c,key,a,options=false){
  const setting=exertion(options),effort=['recover','wait','hold'].includes(key)?1:setting.effort,demand=DEMANDS[key]||[1,1,0],e=efficiencies(c,{...setting,effort},demand,a.delay),fear=severity(c,'fear'),s=c.stats;
- const cost={physical:a.physical*effortCost(effort)/power(s.STA,.25)*(1+.35*fear/100),mental:a.mental*effortCost(effort)/power(s.INT,.25)*(1+.20*fear/100),resolve:e.cost+(key==='heavy'?Math.min(Math.max(0,c.resolve-e.cost),effort):0)};
+ const cost={physical:a.physical*coefficient(c,"expenditure")*effortCost(effort)/power(s.STA,.25)*(1+.35*fear/100),mental:a.mental*coefficient(c,"expenditure")*effortCost(effort)/power(s.INT,.25)*(1+.20*fear/100),resolve:e.cost+(key==='heavy'?Math.min(Math.max(0,c.resolve-e.cost),effort):0)};
  cost.physical/=channel(c,'expenditure');cost.mental/=channel(c,'expenditure');return {e,effort,requested:cost,cost:affordable(c,cost)};
 }
 // Rates per simulated second; resource channels recover independently during low demand.
@@ -41,10 +42,10 @@ export function recoveryRates(c,job=c.job){
  if(phase==='recovery'){p=.85;m=.85;w=.65;}
  if(job?.committed?.cost?.resolve>0&&phase!=='recovery')w*=.25;
  if(key==='move'&&job?.check?.energy?.resolve>0&&phase!=='recovery')w*=.25;
- const fear=severity(c,'fear');return {physical:2.0*power(s.STA,.55)*power(s.VIT,.15)*p*channel(c,'recovery'),mental:1.8*power(s.INT,.55)*power(s.VIT,.15)*m*channel(c,'recovery'),resolve:.28*power(s.WIL,.65)*w*(1-.004*fear)*channel(c,'recovery'),mana:.40*power(s.SPI,.65)*channel(c,'manaRecovery'),hp:0};
+ const fear=severity(c,'fear'),r=coefficient(c,"recovery");return {physical:r*2.0*power(s.STA,.55)*power(s.VIT,.15)*p*channel(c,'recovery'),mental:r*1.8*power(s.INT,.55)*power(s.VIT,.15)*m*channel(c,'recovery'),resolve:r*.28*power(s.WIL,.65)*w*(1-.004*fear)*channel(c,'recovery'),mana:r*.40*power(s.SPI,.65)*channel(c,'manaRecovery'),hp:0};
 }
 export function regenerate(c,dt){if(c.hp<=0)return;const rates=recoveryRates(c);for(const k of ['physical','mental','resolve','mana'])c[k]=Math.min(c.max[k],c[k]+Math.max(0,dt)*rates[k]);}
-export function activeRecovery(c){const s=c.stats;return {physical:15*power(s.STA,.5)*power(s.VIT,.15),mental:12*power(s.INT,.5)*power(s.VIT,.15),resolve:5*power(s.WIL,.5)};}
+export function activeRecovery(c){const s=c.stats,r=coefficient(c,"recovery");return {physical:r*15*power(s.STA,.5)*power(s.VIT,.15),mental:r*12*power(s.INT,.5)*power(s.VIT,.15),resolve:r*5*power(s.WIL,.5)};}
 export function recover(c,amount=activeRecovery(c)){const gains={};for(const k of ['physical','mental','resolve']){gains[k]=Math.min(c.max[k]-c[k],amount[k]);c[k]+=gains[k];}return gains;}
 
 // Conditional forecast: no damage, reactions, interrupts or other state changes.
