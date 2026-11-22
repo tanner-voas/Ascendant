@@ -15,7 +15,7 @@ test('setup, start, movement planner controls, commit, facing, and resume render
  const change=(id,value)=>events.change({target:{id,value,checked:value}});
  const saved=()=>JSON.parse(storage.get('ascendant.battle.v1'));
  const tap=(x,y,dataset={})=>{const target={closest:s=>s==='[data-unit]'&&dataset.unit?{dataset}:s==='[data-waypoint]'&&dataset.waypoint?{dataset}:s==='[data-insert]'&&dataset.insert?{dataset}:null};const ev={button:0,pointerId:1,clientX:x,clientY:y,target};boardEvents.pointerdown(ev);boardEvents.pointerup(ev);};
- assert.match(root.innerHTML,/v0\.1\.2/);events.input({target:{id:'ascendant-seed',value:'42',dataset:{}}});button({do:'start'});button({do:'pause'});
+ assert.match(root.innerHTML,/v0\.1\.3/);events.input({target:{id:'ascendant-seed',value:'42',dataset:{}}});button({do:'start'});button({do:'pause'});
  for(let i=0;i<10&&!saved().state.active.startsWith('A');i++)button({do:'step'});
  assert.match(root.innerHTML,/YOUR TURN/);assert.match(root.innerHTML,/Momentum/);assert.match(root.innerHTML,/data-movement="sprint"/);
  button({movement:'sprint'});assert.equal(saved().ui.moveKind,'sprint');
@@ -26,8 +26,8 @@ test('setup, start, movement planner controls, commit, facing, and resume render
  const ev={button:0,pointerId:2,clientX:x,clientY:y,target:{closest:s=>s==='[data-waypoint]'?{dataset:{waypoint:'1'}}:null}};boardEvents.pointerdown(ev);const q={...ev,clientX:u.x+(x-u.x)*.65,clientY:u.y+(y-u.y)*.65};boardEvents.pointermove(q);boardEvents.pointerup(q);
  // The minimal fixture uses metres as pixels and small paths may not meet the 5px drag threshold;
  // the click/release selection and path remain valid in either case.
- assert.equal(saved().ui.waypoint,1);button({do:'move'});assert.equal(saved().state.moved,true);assert.ok(saved().state.lastMove.total>0);assert.match(root.innerHTML,/Movement complete/);
- button({do:'modeFace'});tap(u.x,u.y);assert.match(root.innerHTML,/Facing updated/);button({action:'guard'});
+ assert.equal(saved().ui.waypoint,1);await change('ascendant-event-mode',true);button({do:'move'});assert.ok(saved().state.units.find(v=>v.id===u.id).job);assert.match(root.innerHTML,/Combat timeline/);button({do:'setup'});button({do:'resume'});assert.ok(saved().state.units.find(v=>v.id===u.id).job);await change('ascendant-event-mode',false);for(let i=0;i<200&&!(saved().state.active===u.id&&saved().state.moved);i++)button({do:'step'});assert.equal(saved().state.active,u.id);assert.equal(saved().state.moved,true);assert.ok(saved().state.lastMove.total>0);assert.match(root.innerHTML,/Movement complete/);
+ await change('ascendant-reaction','brace');assert.equal(saved().state.units.find(v=>v.id===u.id).reaction,'brace');button({do:'modeFace'});tap(u.x,u.y);assert.match(root.innerHTML,/Facing updated/);button({action:'guard'});
  button({do:'setup'});assert.match(root.innerHTML,/Resume/);button({do:'resume'});assert.match(root.innerHTML,/Saved battle restored/);assert.equal(saved().ui.paused,true);
- await change('ascendant-threat',false);assert.equal(saved().ui.showThreat,false);
+ button({do:'replayPrev'});assert.match(root.innerHTML,/Recorded battlefield position/);await change('ascendant-threat',false);assert.equal(saved().ui.showThreat,false);
 });

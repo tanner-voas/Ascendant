@@ -1,0 +1,9 @@
+// Durations are simulated seconds. Reaction drives preparation and recovery;
+// execution is separately governed by the physical or cognitive task.
+export const PHASES={strike:[.22,.48,.30],heavy:[.25,.52,.23],quick:[.18,.49,.33],shove:[.20,.53,.27],guard:[.22,.40,.38],recover:[.10,.78,.12],observe:[.18,.65,.17],wait:[.08,.80,.12],hold:[.08,.80,.12],move:[.15,.72,.13]};
+export const REACTIONS={none:'None',dodge:'Dodge',brace:'Brace',counter:'Counter'};
+export function timing(c,key,base,e,penalty=1){const w=PHASES[key],s=c.stats,rea=(s.REA/20)**.55,physical=(s.AGI/20)**.40*(s.STR/20)**(key==='heavy'?.18:.08),mental=(s.INT/20)**.5;const execution=['observe','hold'].includes(key)?mental:key==='recover'||key==='wait'?1: key==='move'?(s.AGI/20)**.55:physical;const readiness=Math.max(.45,.35*e.p+.5*e.m+.15*e.w),work=Math.max(.45,['observe','hold'].includes(key)? .9*e.m+.1*e.w:['recover','wait'].includes(key)?1:.85*e.p+.15*e.w);return {preparation:Math.max(.04,base*w[0]*penalty/rea/readiness),execution:Math.max(.06,base*w[1]*penalty/execution/work),recovery:Math.max(.04,base*w[2]*penalty/rea/readiness)};}
+export const duration=t=>t.preparation+t.execution+t.recovery;
+export function phase(u){return u.hp<=0?'down':u.job?.phase??'ready';}
+export function timelineRows(b){return b.units.filter(u=>u.hp>0).map(u=>({id:u.id,name:u.name,team:u.team,phase:phase(u),key:u.job?.key??null,start:u.job?.start??u.next,prepEnd:u.job?.prepEnd??u.next,impactAt:u.job?.impactAt??u.next,end:u.job?.end??u.next,next:u.job?.at??u.next})).sort((a,z)=>a.next-z.next||a.id.localeCompare(z.id));}
+export function recordFrame(b,label){if(b.recordFrames===false)return;const frame={time:b.time,label,active:b.active,units:b.units.map(u=>({id:u.id,x:u.x,y:u.y,hp:u.hp,physical:u.physical,mental:u.mental,resolve:u.resolve,facing:u.facing,phase:phase(u)}))};b.frames??=[];b.frames.push(frame);if(b.frames.length>180)b.frames.shift();}
