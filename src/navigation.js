@@ -2,10 +2,10 @@
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 export const MOVEMENT_MODES=Object.freeze({
- walk:{label:'Walk',budget:.72,energy:.50,turn:.72,delay:.85,exposure:-1},
+ walk:{label:'Walk',budget:.72,energy:.50,turn:.72,delay:1.45,exposure:-1},
  run:{label:'Run',budget:1,energy:1,turn:1,delay:1,exposure:0},
- sprint:{label:'Sprint',budget:1.35,energy:1.65,turn:1.28,delay:1.12,exposure:2},
- cautious:{label:'Cautious',budget:.58,energy:.72,turn:.6,delay:1.12,exposure:-4}
+ sprint:{label:'Sprint',budget:1.35,energy:1.65,turn:1.28,delay:.75,exposure:2},
+ cautious:{label:'Careful',budget:.58,energy:.72,turn:.6,delay:1.8,exposure:-4}
 });
 export const movementMode=key=>Object.hasOwn(MOVEMENT_MODES,key)?MOVEMENT_MODES[key]:MOVEMENT_MODES.run;
 export const heading=(a,b)=>Math.atan2(b.y-a.y,b.x-a.x);
