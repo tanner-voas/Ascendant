@@ -115,3 +115,24 @@ body.ascendant-mode{margin:0;background:#111d22;color:#e3e9e6;font:15px/1.4 -app
 .ascendant-standby{padding:6px 0}
 @media(min-width:700px){.ascendant-action-head .ascendant-clock-tools{margin-left:auto}.ascendant-primary-actions{grid-template-columns:repeat(6,minmax(0,1fr))}.ascendant-phase-panel .ascendant-phase-row{grid-template-columns:48px minmax(40px,1fr) minmax(112px,22%)}}
 @media(max-width:390px){.ascendant-action-head .ascendant-clock-tools{width:100%}.ascendant-phase-panel .ascendant-phase-row{grid-template-columns:32px minmax(20px,1fr) minmax(70px,31%)}.ascendant-ui-fold>summary small{max-width:55%}}
+
+/* v0.1.16 — iPhone notch clearance and persistent compact, single-row controls. */
+body.ascendant-mode .app-frame{padding:0;max-width:none}
+.ascendant-mode #app.ascendant-root{padding-top:calc(24px + env(safe-area-inset-top));padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+.ascendant-head{position:sticky;top:calc(12px + env(safe-area-inset-top));z-index:31;display:flex;flex-wrap:nowrap;min-width:0;gap:9px;padding:10px 0 12px;margin:0 0 12px;background:#111d22}
+.ascendant-brand{flex:1 1 auto;min-width:0;gap:8px}
+.ascendant-brand>div{min-width:0;overflow:hidden}
+.ascendant-brand img{flex:0 0 40px;width:40px;height:40px}
+.ascendant-head .ascendant-brand h1{font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ascendant-brand p{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ascendant-head-actions{display:flex;flex:0 0 auto;flex-wrap:nowrap;gap:6px;align-items:center}
+.ascendant-head-actions button.ascendant-nav-button{display:grid;place-items:center;padding:0;width:43px;height:43px;min-height:43px;flex:0 0 43px;border-radius:12px}
+.ascendant-nav-icon{width:21px;height:21px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ascendant-nav-icon circle{fill:currentColor;stroke:none}
+.ascendant-header-menu-wrap{position:relative}
+.ascendant-header-menu{position:absolute;top:calc(100% + 7px);right:0;min-width:160px;z-index:40;padding:7px;border:1px solid #50666c;border-radius:12px;background:#22343a;box-shadow:0 15px 28px #0009}
+.ascendant-header-menu button{width:100%;min-height:42px;text-align:left;white-space:nowrap}
+.ascendant-head .pwa-updating .ascendant-nav-icon{animation:ascendant-header-spin .85s linear infinite;transform-origin:center}
+@keyframes ascendant-header-spin{to{transform:rotate(360deg)}}
+@media(max-width:390px){.ascendant-head .ascendant-brand h1{font-size:18px}.ascendant-brand img{width:36px;height:36px;flex-basis:36px}.ascendant-head-actions button.ascendant-nav-button{width:39px;height:41px;min-height:41px;flex-basis:39px}}
+@media(prefers-reduced-motion:reduce){.ascendant-head .pwa-updating .ascendant-nav-icon{animation-duration:2s}}

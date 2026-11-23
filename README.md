@@ -1,4 +1,6 @@
-# Ascendant — Tactical Battleground (v0.1.15)
+# Ascendant — Tactical Battleground (v0.1.16)
+
+**v0.1.16:** Persistent one-row safe-area-aware header, hosted Home/standalone Refresh, and an overflow menu for battle setup. See `docs/header-v0.1.16.md`.
 
 Initial, classless 5v5 prototype for a future LitRPG cultivation role-playing game, loosely inspired by Pathfinder. No classes, magic, feats, gear, levels, or unique abilities yet. This is a standalone app and a lazy-loaded AppLauncher module; no external dependencies or backend.
 

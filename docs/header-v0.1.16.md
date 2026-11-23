@@ -1,0 +1,3 @@
+# Ascendant v0.1.16 — Unified mobile header
+
+Use one persistent sticky, single-line header with iOS safe-area clearance. The logo, name and version occupy the left. In a battle, the overflow menu holds the previous Save & setup control instead of consuming a second button row. The far-right button uses the common Home symbol under AppLauncher; standalone displays the same refresh symbol used by the other apps, with guarded update behavior and an animated icon during download/installation. Existing battle and roster save operations run before navigation. No battle rules, data schema or Google integration are changed.
