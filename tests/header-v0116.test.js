@@ -5,7 +5,7 @@ const src=readFileSync(new URL('../src/app.js',import.meta.url),'utf8');
 const css=readFileSync(new URL('../src/styles.css',import.meta.url),'utf8');
 test('battle header uses one row, compact overflow and unified final navigation',()=>{
  const head=src.slice(src.indexOf('function header(sub)'),src.indexOf('function movementOverlay'));
- assert.match(head,/v0\.1\.16/);
+ assert.ok(head.includes('v'+JSON.parse(readFileSync(new URL('../package.json',import.meta.url),'utf8')).version));
  assert.match(head,/data-do="headerMenu"/);
  assert.match(head,/data-do="\$\{hosted\?'home':'update'\}"/);
  assert.ok(head.indexOf('ascendant-header-menu-wrap')<head.indexOf('ascendant-host-home'));
