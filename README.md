@@ -171,3 +171,7 @@ The tactical battlefield, combat engine, movement and directional engagement rul
 The allied timeline is now a compact one-line summary; opening **Timeline** reveals per-ally phase bars. Labels use `Move[E]`, `Strike[P]`, and `Strike[R]` rather than verbose phase descriptions. For discrete attacks and controls, the action's execution interval is represented as wind-up and its actual resolution as an instantaneous `[E]` marker, preserving existing simulation timing. Continuous actions retain a visible execution interval. This is a presentation change, not a change to attack timings or damage.
 
 **Character**, **Team tactics**, **Battle log**, **Replay** and **Battle options** are expandable instead of fully rendering as a long second column of controls. Detailed combat forecasts are nested inside **Action options**. The duplicate team roster at the bottom of the battlefield has been removed: select characters from the two fixed rows or map. Enemy data remains limited to perceived identity and position. No controls or mechanical capabilities have been removed.
+
+### Historical version correction
+
+Commit `f785e58cc1675e63c820d57d8277d86851cbc94d` declared `1.1.11` in error. Its canonical release tag is `v0.1.11` (`v0.1.11.r1`). The original commit and its source bytes are retained; current builds remain at their declared version.
