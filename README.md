@@ -1,6 +1,8 @@
-# Ascendant — Tactical Battleground (v0.1.16)
+# Ascendant — Tactical Battleground (v0.1.19)
 
-## Shared PWA-Core (roadmap 7B, v0.1.18)
+## Shared PWA-Core (roadmap 7C, v0.1.19)
+
+Shared browser host capability, file delivery and standalone registration now use pinned Core primitives. App save policies, export formats and error/confirmation UI remain local. See `RELEASE_v0.1.19.md`.
 
 Initialize the pinned dependencies before building or testing in a development/CI checkout:
 
@@ -10,7 +12,7 @@ npm test
 python3 package.py
 ```
 
-The `shared/pwa-core` gitlink pins the independently versioned PWA-Core v0.1.0. The packager verifies the checkout against the gitlink and generates the standalone worker using the shared inventory builder. Existing cache namespaces, service-worker URL, manifest, storage and hosted/standalone behavior remain unchanged. Runtime assets are copied into their existing paths; the source adapters are not bundled. AppLauncher still owns the hosted worker. The existing coordinator recursively initializes dependencies and validates the combined release; no new dispatch secrets or automatic Core pin updates are required. Roll back by reverting the consumer migration and deploying a validated release, not by deleting browser storage.
+The `shared/pwa-core` gitlink pins the independently versioned PWA-Core v0.1.1. The packager verifies the checkout against the gitlink and generates the standalone worker using the shared inventory builder. Existing cache namespaces, service-worker URL, manifest, storage and hosted/standalone behavior remain unchanged. Runtime assets are copied into their existing paths; the source adapters are not bundled. AppLauncher still owns the hosted worker. The existing coordinator recursively initializes dependencies and validates the combined release; no new dispatch secrets or automatic Core pin updates are required. Roll back by reverting the consumer migration and deploying a validated release, not by deleting browser storage.
 
 
 **v0.1.16:** Persistent one-row safe-area-aware header, hosted Home/standalone Refresh, and an overflow menu for battle setup. See `docs/header-v0.1.16.md`.
