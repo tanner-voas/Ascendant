@@ -1,5 +1,18 @@
 # Ascendant — Tactical Battleground (v0.1.16)
 
+## Shared PWA-Core (roadmap 7B, v0.1.18)
+
+Initialize the pinned dependencies before building or testing in a development/CI checkout:
+
+```sh
+git submodule update --init --recursive
+npm test
+python3 package.py
+```
+
+The `shared/pwa-core` gitlink pins the independently versioned PWA-Core v0.1.0. The packager verifies the checkout against the gitlink and generates the standalone worker using the shared inventory builder. Existing cache namespaces, service-worker URL, manifest, storage and hosted/standalone behavior remain unchanged. Runtime assets are copied into their existing paths; the source adapters are not bundled. AppLauncher still owns the hosted worker. The existing coordinator recursively initializes dependencies and validates the combined release; no new dispatch secrets or automatic Core pin updates are required. Roll back by reverting the consumer migration and deploying a validated release, not by deleting browser storage.
+
+
 **v0.1.16:** Persistent one-row safe-area-aware header, hosted Home/standalone Refresh, and an overflow menu for battle setup. See `docs/header-v0.1.16.md`.
 
 Initial, classless 5v5 prototype for a future LitRPG cultivation role-playing game, loosely inspired by Pathfinder. No classes, magic, feats, gear, levels, or unique abilities yet. This is a standalone app and a lazy-loaded AppLauncher module; no external dependencies or backend.
