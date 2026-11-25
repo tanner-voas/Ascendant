@@ -136,3 +136,7 @@ body.ascendant-mode .app-frame{padding:0;max-width:none}
 @keyframes ascendant-header-spin{to{transform:rotate(360deg)}}
 @media(max-width:390px){.ascendant-head .ascendant-brand h1{font-size:18px}.ascendant-brand img{width:36px;height:36px;flex-basis:36px}.ascendant-head-actions button.ascendant-nav-button{width:39px;height:41px;min-height:41px;flex-basis:39px}}
 @media(prefers-reduced-motion:reduce){.ascendant-head .pwa-updating .ascendant-nav-icon{animation-duration:2s}}
+
+/* Browser page lock; custom canvas/map touch-action rules remain intact. */
+html,body{touch-action:manipulation}
+input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font-size:16px}

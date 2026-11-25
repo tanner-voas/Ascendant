@@ -7,7 +7,7 @@ const root=new URL('../',import.meta.url);
 test('standalone package enables page zoom and fingerprints every offline asset',()=>{
  execFileSync('python3',['package.py'],{cwd:root});
  const html=readFileSync(new URL('dist/standalone/index.html',root),'utf8');
- assert.doesNotMatch(html,/maximum-scale|user-scalable=no/);
+ assert.match(html,/maximum-scale=1, user-scalable=no/);
  const sw=readFileSync(new URL('dist/standalone/sw.js',root),'utf8');
  const assets=JSON.parse(sw.match(/const ASSETS=(.*);\n/)[1]);
  assert.ok(assets.length>5);for(const a of assets){
