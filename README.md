@@ -1,4 +1,4 @@
-# Ascendant — Tactical Battleground (v0.1.22)
+# Ascendant — Tactical Battleground (v0.1.23)
 
 ## Shared PWA-Core (roadmap 7C, v0.1.19)
 
